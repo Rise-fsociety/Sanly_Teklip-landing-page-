@@ -6,7 +6,7 @@ export function Hero() {
   const titleDelay = 1.0; 
 
   return (
-    <section className="relative w-full h-[100vh] min-h-[600px] bg-white flex items-center justify-center overflow-hidden">
+    <section className="relative w-full md:h-[100vh] min-h-[600px] bg-transparent flex items-center justify-center overflow-hidden">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -14,7 +14,7 @@ export function Hero() {
         className="absolute inset-0 z-0"
       >
         <Antigravity
-          count={700}
+          count={600}
           magnetRadius={15}
           ringRadius={15}
           waveSpeed={0.4}
@@ -43,7 +43,7 @@ export function Hero() {
           Sanly we Ygtybarly
         </motion.div>
         
-        <h1 className="text-6xl md:text-9xl font-black mb-8 leading-tight drop-shadow-sm bg-gradient-to-r from-[#3AB4FF] to-[#0157A4] bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-9xl font-black mb-8 leading-tight drop-shadow-sm bg-gradient-to-r from-[#3AB4FF] to-[#0157A4] bg-clip-text text-transparent">
           {titleText.split("").map((char, index) => (
             <motion.span
               key={index}

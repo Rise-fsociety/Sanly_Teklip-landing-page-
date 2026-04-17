@@ -5,31 +5,38 @@ import { useActiveSection } from "@/hooks/use-active-section";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/mobile-nav";
 import Image from "next/image";
+import { useSmoothScroll } from "@/context/smooth-scroll-context";
 
 export const navLinks = [
   {
     label: "Biz Hakda",
-    href: "#features",
+    href: "#about",
   },
   {
     label: "Hyzmatlar",
     href: "#services",
   },
   {
-    label: "Nyrhlar",
-    href: "#pricing",
+    label: "Tehnologiýalar",
+    href: "#tools",
   },
   {
-    label: "Gatnaşyk",
-    href: "#about",
+    label: "Nyrhlar",
+    href: "#pricing",
   },
 ];
 
 export function Header() {
   const scrolled = useScroll(10);
+  const { scrollTo } = useSmoothScroll();
   const activeSection = useActiveSection(
     navLinks.map((link) => link.href.replace("#", "")),
   );
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    scrollTo(href);
+  };
 
   return (
     <header className="sticky md:top-2 z-50 container md:px-4 mx-auto transition-all duration-300">
@@ -37,7 +44,7 @@ export function Header() {
         className={cn(
           "mx-auto w-full border-transparent border-b md:rounded-md md:border md:transition-all md:ease-out",
           {
-            "max-w-7xl border-brand-blue bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/50 md:shadow":
+            "max-w-8xl border-brand-blue bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/50 md:shadow":
               scrolled,
           },
         )}
@@ -50,7 +57,7 @@ export function Header() {
             },
           )}
         >
-          <a href="#">
+          <a href="#" onClick={(e) => handleNavClick(e, "#")}>
             <Image
               src="/TransparentLogo.svg"
               alt="Logo"
@@ -73,7 +80,12 @@ export function Header() {
                       isActive ? "text-brand-blue" : "text-slate-600",
                     )}
                   >
-                    <a href={link.href}>{link.label}</a>
+                    <a 
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                    >
+                      {link.label}
+                    </a>
                   </Button>
                 );
               })}

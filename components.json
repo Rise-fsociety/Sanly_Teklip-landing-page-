@@ -24,6 +24,7 @@
   "registries": {
     "@efferd": "https://efferd.com/r/{name}.json",
     "@magicui": "https://magicui.design/r/{name}",
-    "@react-bits": "https://reactbits.dev/r/{name}.json"
+    "@react-bits": "https://reactbits.dev/r/{name}.json",
+    "@motion-primitives": "https://motion-primitives.com/c/{name}.json"
   }
 }

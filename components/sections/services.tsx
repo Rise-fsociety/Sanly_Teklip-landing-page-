@@ -51,7 +51,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-24 bg-white overflow-hidden">
+    <section id="services" className="py-24 bg-transparent overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,7 +82,7 @@ export function Services() {
                 gradientColor="#3AB4FF"
                 gradientFrom="#3AB4FF"
                 gradientTo="#0157A4"
-                gradientOpacity={0.5}
+                gradientOpacity={1}
               >
                 <div className="p-8 h-full flex flex-col items-center border-gray-200 border">
                   <div className="mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
