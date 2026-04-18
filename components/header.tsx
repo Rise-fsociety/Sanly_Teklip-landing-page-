@@ -1,4 +1,6 @@
 "use client";
+
+
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { useActiveSection } from "@/hooks/use-active-section";
@@ -21,8 +23,9 @@ export const navLinks = [
     href: "#tools",
   },
   {
-    label: "Nyrhlar",
-    href: "#pricing",
+    label: "Harytlar",
+    href: "https://sanlyteklip.com.tm/ru/ag",
+    external: true
   },
 ];
 
@@ -34,8 +37,10 @@ export function Header() {
   );
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    scrollTo(href);
+    if(href.startsWith("#")) {
+      e.preventDefault();
+      scrollTo(href);
+    }
   };
 
   return (
@@ -59,10 +64,11 @@ export function Header() {
         >
           <a href="#" onClick={(e) => handleNavClick(e, "#")}>
             <Image
-              src="/TransparentLogo.svg"
+              src="/TransparentLogo.webp"
               alt="Logo"
               width={90}
               height={80}
+              priority={true}
               className="mb-2"
             />
           </a>
@@ -83,6 +89,8 @@ export function Header() {
                     <a 
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
                     >
                       {link.label}
                     </a>
