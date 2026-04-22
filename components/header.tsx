@@ -1,6 +1,5 @@
 "use client";
 
-
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { useActiveSection } from "@/hooks/use-active-section";
@@ -8,24 +7,24 @@ import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/mobile-nav";
 import Image from "next/image";
 import { useSmoothScroll } from "@/context/smooth-scroll-context";
+import Link from "next/link";
 
 export const navLinks = [
   {
     label: "Biz Hakda",
-    href: "#about",
+    href: "/#about",
   },
   {
     label: "Hyzmatlar",
-    href: "#services",
+    href: "/#services",
   },
   {
     label: "Tehnologiýalar",
-    href: "#tools",
+    href: "/#tools",
   },
   {
     label: "Harytlar",
-    href: "https://sanlyteklip.com.tm/ru/ag",
-    external: true
+    href: "/products",
   },
 ];
 
@@ -33,13 +32,19 @@ export function Header() {
   const scrolled = useScroll(10);
   const { scrollTo } = useSmoothScroll();
   const activeSection = useActiveSection(
-    navLinks.map((link) => link.href.replace("#", "")),
+    navLinks.map((link) => link.href.replace("/#", "")),
   );
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if(href.startsWith("#")) {
-      e.preventDefault();
-      scrollTo(href);
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: any,
+  ) => {
+    if (link.href.startsWith("/#")) {
+      // If we are already on home, scroll. Otherwise let the Link component handle it.
+      if (window.location.pathname === "/") {
+        e.preventDefault();
+        scrollTo(link.href.replace("/", ""));
+      }
     }
   };
 
@@ -86,14 +91,12 @@ export function Header() {
                       isActive ? "text-brand-blue" : "text-slate-600",
                     )}
                   >
-                    <a 
+                    <Link
                       href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
+                      onClick={(e) => handleNavClick(e, link)}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </Button>
                 );
               })}

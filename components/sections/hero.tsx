@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Antigravity from "../Antigravity";
+import TextType from "../textType/TextType";
 
 export function Hero() {
   const titleText = "Sanly Teklip";
@@ -40,7 +41,21 @@ export function Hero() {
           transition={{ delay: titleDelay, duration: 0.8, ease: "easeOut" }}
           className="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-50 border border-blue-100 text-[#0157A4] text-xs font-bold tracking-[0.2em] uppercase shadow-sm"
         >
-          Sanly we Ygtybarly
+         <TextType
+           typingSpeed={75}
+           pauseDuration={1500}
+           showCursor
+           cursorCharacter="_"
+           texts={[
+             "Sanly çözgütler.",
+             "Ygtybarly hyzmatlar.",
+             "Akhasap hyzmatlar.",
+             "Sanly Marketing.",
+           ]}
+           deletingSpeed={50}
+           variableSpeed={{ min: 60, max: 120 }}
+           cursorBlinkDuration={0.5}
+         />
         </motion.div>
         
         <h1 className="text-5xl md:text-9xl font-black mb-8 leading-tight drop-shadow-sm bg-gradient-to-r from-[#3AB4FF] to-[#0157A4] bg-clip-text text-transparent">

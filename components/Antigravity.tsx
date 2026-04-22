@@ -1,3 +1,5 @@
+"use client";
+
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useMemo, useRef, useEffect } from 'react';
 import * as THREE from 'three';
@@ -19,9 +21,10 @@ const AntigravityInner = ({
   particleShape = 'capsule',
   fieldStrength = 10
 }) => {
-  const meshRef = useRef(null);
+  const meshRef = useRef<THREE.InstancedMesh>(null);
   const { viewport } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
+
 
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
@@ -62,14 +65,15 @@ const AntigravityInner = ({
     return temp;
   }, [count, viewport.width, viewport.height, color]);
 
-  useEffect(() => {
-    if (meshRef.current) {
-      particles.forEach((particle, i) => {
-        meshRef.current.setColorAt(i, particle.color);
-      });
-      meshRef.current.instanceColor.needsUpdate = true;
-    }
-  }, [particles]);
+ useEffect(() => {
+  const mesh = meshRef.current;
+  if (!mesh) return;
+
+  particles.forEach((particle, i) => {
+    mesh.setColorAt(i, particle.color);
+  });
+  mesh.instanceColor!.needsUpdate = true;
+}, [particles]);
 
   useFrame(state => {
     const mesh = meshRef.current;
@@ -165,7 +169,7 @@ const AntigravityInner = ({
   );
 };
 
-const Antigravity = props => {
+const Antigravity = (props:any) => {
   return (
     <Canvas camera={{ position: [0, 0, 50], fov: 35 }}>
       <AntigravityInner {...props} />

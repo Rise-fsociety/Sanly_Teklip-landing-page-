@@ -6,6 +6,7 @@ import {
   AnimatedSpan,
   TypingAnimation,
 } from "@/components/ui/terminal";
+import Link from "next/link";
 
 export function About() {
   return (
@@ -26,14 +27,12 @@ export function About() {
               <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight tracking-tight">
                 Dinamiki we innowasion sanly çözgütler merkezi.
               </p>
-              <div className="space-y-6 text-xl text-slate-600 leading-relaxed max-w-lg">
+              <div className="space-y-6 text-xl md:text-2xl text-slate-600 leading-relaxed max-w-lg">
                 <p>
-                  Biz diňe bir programma däl, eýsem täze başlangyçlary
-                  döredýäris. Täze nesil tehnologiýalar bilen geljegiňizi bina
-                  edeliň.
+                  Biz diňe bir programma däl, eýsem <span className="text-brand-blue font-bold">Akhasap</span> Söwda we önümçilik awtomatlaşdyrma hyzmatlaryny döredýäris.
                 </p>
                 <p>
-                  Ýokary hilli programmalar we döwrebap web-platformalar arkaly
+                  Ýokary hilli programmalar we <span className="text-brand-blue font-bold">Akhasap</span> arkaly
                   biziň hyzmatdaşlarymyz täze üstünliklere ýetýärler.
                 </p>
               </div>
@@ -47,12 +46,12 @@ export function About() {
             viewport={{ once: true }}
             className="flex justify-center"
           >
-            <Terminal className="w-full max-w-2xl bg-white text-slate-900 border-2 border-slate-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] rounded-3xl p-2">
+            <Terminal className="w-full h-auto min-h-fit max-w-2xl bg-white text-slate-900 border-2 border-slate-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] rounded-3xl p-2">
                <TypingAnimation>&gt; npm run dev</TypingAnimation>
 
               <AnimatedSpan
                 delay={200}
-                className="text-xl font-bold text-slate-900"
+                className="text-xl md:text-3xl font-bold text-slate-900"
               >
                 <span>Sanly Teklip IT Kompaniýasy</span>
               </AnimatedSpan>
@@ -92,7 +91,7 @@ export function About() {
                 delay={1200}
                 className="text-xl text-brand-blue font-bold"
               >
-                <span>→ Innowasion Mobil Goşundylar</span>
+                <span>→ Innowasion Mobil Programalar</span>
               </AnimatedSpan>
 
               <AnimatedSpan

@@ -7,40 +7,37 @@ import {
   Cpu, 
   Palette, 
   Lightbulb, 
-  MonitorSmartphone
+  MonitorSmartphone,
+  LayoutDashboard,
+  HandCoins
 } from "lucide-react";
 import { MagicCard } from "../ui/magic-card";
 
 const services = [
   {
-    title: "Web Ösüşi",
+    title: "Web-saýt",
     description: "Döwrebap we tiz işleýän web-saýtlary we platformalary döredýäris.",
     icon: Globe,
-    color: "203 100 60", // Brand Blue
   },
   {
-    title: "Android Goşundy",
+    title: "Android",
     description: "Siziň biznesiňiz üçin ýokary hilli Android mobil goşundylaryny işläp düzýäris.",
     icon: Smartphone,
-    color: "142 70 50", // Greenish for Android feel
   },
   {
-    title: "iOS Goşundy",
+    title: "iOS",
     description: "iPhone we iPad ulanyjylary üçin iň oňat tejribeleri hödürleýän iOS goşundylary.",
     icon: MonitorSmartphone,
-    color: "0 0 80", // Light gray/silver for Apple
   },
   {
     title: "Kompýuter Hyzmatlary",
     description: "Tehniki goldaw, kompýuterleri sazlamak we programmalary gurnamak hyzmatlary.",
     icon: Cpu,
-    color: "203 100 40", // Darker Blue
   },
   {
-    title: "UI/UX Dizaýn",
-    description: "Ulanyjylar üçin amatly we owadan interfeýs dizaýnlaryny taýýarlaýarys.",
-    icon: Palette,
-    color: "300 100 60", // Purplish
+    title: "Akhasap",
+    description: "Maliýe, dermanhana, kafe we işgärleri dolandyrmak ýaly ähli amallaryňyzy bir platformada jemläň",
+    icon: HandCoins,
   },
   {
     title: "IT Konsultasiýa",
@@ -51,7 +48,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-24 bg-transparent overflow-hidden">
+    <section id="services" className="md:py-24 bg-transparent overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
