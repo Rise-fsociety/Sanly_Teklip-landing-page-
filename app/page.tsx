@@ -1,4 +1,5 @@
 "use client";
+// Forced recompile
 
 import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
@@ -8,7 +9,6 @@ import { Partners } from "@/components/sections/partners";
 import { Tools } from "@/components/sections/tools";
 import { About } from "@/components/sections/about";
 import { Pricing } from "@/components/sections/pricing";
-import { Footer } from "@/components/sections/footer";
 import Lenis from "lenis";
 import { useSmoothScroll } from "@/context/smooth-scroll-context";
 
@@ -37,6 +37,20 @@ function HomeContent() {
 
     setIsRendered(true);
 
+    const hash = window.location.hash;
+    if (hash && lenis) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            lenis.scrollTo(hash, {
+              duration: 3,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          }, 400);
+        });
+      });
+    }
+
     return () => {
       lenis.destroy();
       setLenis(null);
@@ -56,7 +70,6 @@ function HomeContent() {
         <Tools />
         <Pricing />
       </main>
-      <Footer />
     </>
   );
 }

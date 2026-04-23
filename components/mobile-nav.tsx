@@ -2,14 +2,15 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { Portal, PortalBackdrop } from "@/components/ui/portal";
 import { Button } from "@/components/ui/button";
-import { navLinks } from "@/components/header";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { XIcon, MenuIcon } from "lucide-react";
+import Link from "next/link";
+import { navLinks } from "./header";
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
   const activeSection = useActiveSection(
-    navLinks.map((link) => link.href.replace("#", "")),
+    navLinks.map((link) => link.href.replace("/#", "")),
   );
 
   return (
@@ -41,7 +42,7 @@ export function MobileNav() {
           >
             <div className="grid gap-y-4">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.href.replace("#", "");
+                const isActive = activeSection === link.href.replace("/#", "");
                 return (
                   <Button
                     asChild
@@ -53,7 +54,7 @@ export function MobileNav() {
                     variant="ghost"
                     onClick={() => setOpen(false)}
                   >
-                    <a href={link.href}>{link.label}</a>
+                    <Link href={link.href}>{link.label}</Link>
                   </Button>
                 );
               })}

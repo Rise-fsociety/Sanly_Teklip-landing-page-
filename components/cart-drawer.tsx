@@ -124,7 +124,6 @@ export function CartDrawer() {
                 )}
               </div>
 
-              {/* Footer */}
               {cart.length > 0 && (
                 <div className="p-6 border-t border-border bg-muted/20 backdrop-blur-md">
                   <div className="flex justify-between items-center mb-6">

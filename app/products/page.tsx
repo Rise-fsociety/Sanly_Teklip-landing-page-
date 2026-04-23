@@ -1,21 +1,25 @@
 "use client";
 
-import {
-  Search,
-  Grid,
-  Home,
-  Heart,
-  Star,
-} from "lucide-react";
+import { Search, Grid, Home, Heart, Star } from "lucide-react";
 import { Product } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Footer } from "@/components/sections/footer";
 import { ProductDetailModal } from "@/components/productDetailModal";
 import { WishlistDrawer } from "@/components/wishlistDrawer";
 import { cn } from "@/lib/utils";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { PromoCarousel } from "@/components/products/PromoCarousel";
 
 const categories = [
   "All Products",
@@ -92,6 +96,45 @@ const staticProducts: Product[] = [
   },
 ];
 
+// Featured carousel products
+const featuredProducts: Product[] = [
+  {
+    id: "featured-1",
+    name: "Summer Sale Collection",
+    price: 999,
+    image: "/Akar.png",
+    description: "Get up to 50% off on selected enterprise solutions",
+  },
+  {
+    id: "featured-2",
+    name: "New Cloud Solutions",
+    price: 1299,
+    image: "/Akhasap.png",
+    description: "Discover our latest cloud computing innovations",
+  },
+  {
+    id: "featured-3",
+    name: "Security Bundle",
+    price: 1799,
+    image: "/Archalyk.webp",
+    description: "Complete security package for your business",
+  },
+  {
+    id: "featured-3",
+    name: "Security Bundle",
+    price: 1799,
+    image: "/Archalyk.webp",
+    description: "Complete security package for your business",
+  },
+  {
+    id: "featured-3",
+    name: "Security Bundle",
+    price: 1799,
+    image: "/Archalyk.webp",
+    description: "Complete security package for your business",
+  },
+];
+
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("All Products");
   const [searchQuery, setSearchQuery] = useState("");
@@ -100,15 +143,20 @@ export default function ProductsPage() {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
+
+   const plugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
+
   const toggleWishlist = (productId: string) => {
-    setWishlist(prev => 
-      prev.includes(productId) 
-        ? prev.filter(id => id !== productId) 
-        : [...prev, productId]
+    setWishlist((prev) =>
+      prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId],
     );
   };
 
-  const wishlistItems = staticProducts.filter(p => wishlist.includes(p.id));
+  const wishlistItems = staticProducts.filter((p) => wishlist.includes(p.id));
 
   const filteredProducts = staticProducts.filter((product) => {
     const matchesSearch = product.name
@@ -121,9 +169,20 @@ export default function ProductsPage() {
     setSelectedProduct(product);
   };
 
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+    const handleLoad = () => window.scrollTo(0, 0);
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      window.history.scrollRestoration = "auto";
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Top Navigation Bar */}
+    <div className="min-h-screen bg-gray-100">
       <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -149,14 +208,18 @@ export default function ProductsPage() {
             </div>
 
             <div className="flex items-center gap-4">
-              <button 
+              <button
                 onClick={() => setIsWishlistOpen(true)}
                 className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
-                <Heart className={cn(
-                  "w-5 h-5",
-                  wishlist.length > 0 ? "fill-red-500 text-red-500" : "text-gray-900"
-                )} />
+                <Heart
+                  className={cn(
+                    "w-5 h-5",
+                    wishlist.length > 0
+                      ? "fill-red-500 text-red-500"
+                      : "text-gray-900",
+                  )}
+                />
                 {wishlist.length > 0 && (
                   <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
                     {wishlist.length}
@@ -181,10 +244,14 @@ export default function ProductsPage() {
           </div>
         </div>
       </nav>
-
-      {/* Main Content */}
       <div className="pt-16 md:pt-16">
-        {/* Hero Section */}
+        {/* Featured Products Carousel */}
+        <div className="bg-gray-50 py-8 md:py-12">
+          <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
+            <PromoCarousel/>
+          </div>
+        </div>
+
         <div className="relative bg-[#0157A4] border-b border-gray-200">
           <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
             <div className="max-w-3xl">
@@ -199,7 +266,6 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {/* Category Filter */}
         <div className="bg-white border-b border-gray-200 sticky top-16 z-40">
           <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-2 overflow-x-auto py-4 scrollbar-hide">
@@ -219,9 +285,7 @@ export default function ProductsPage() {
             </div>
           </div>
         </div>
-
-        {/* Products Grid */}
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-gray-50">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {filteredProducts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-24">
               <Search className="w-16 h-16 text-gray-300 mb-4" />
@@ -233,83 +297,79 @@ export default function ProductsPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 ">
               {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
-                  onMouseEnter={() => setHoveredProduct(product.id)}
-                  onMouseLeave={() => setHoveredProduct(null)}
-                  onClick={() => handleOpenDetails(product)}
-                >
-                  {/* Product Image */}
-                  <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-gray-50">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                // ... inside your {filteredProducts.map(...)}
 
-                    {/* View Details Overlay - Shows on Hover */}
-                    <div
-                      className={`absolute inset-x-4 bottom-4 transition-all duration-300 ${
-                        hoveredProduct === product.id
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-4"
-                      }`}
-                    >
-                      <Button
-                        className="w-full bg-white text-black hover:bg-black hover:text-white border-0 rounded-none h-12 font-medium transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleOpenDetails(product);
-                        }}
-                      >
-                        View Details
-                      </Button>
-                    </div>
+<div
+  key={product.id}
+  className="text-sm border-[1px] rounded-lg border-gray-200 group bg-white flex flex-col overflow-hidden"
+>
+  {/* --- IMAGE SECTION (No changes here) --- */}
+  <div className="relative group overflow-hidden bg-gray-50">
+    {product?.image && (
+      <div
+        className="cursor-pointer"
+        onClick={() => handleOpenDetails(product)}
+      >
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={500}
+          height={500}
+          priority
+          className="w-full h-64 object-contain transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+    )}
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleWishlist(product.id);
+      }}
+      className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-sm transition-all hover:bg-gray-100 active:scale-90 z-10"
+    >
+      <Heart
+        className={cn(
+          "w-4 h-4 transition-colors",
+          wishlist.includes(product.id)
+            ? "fill-red-500 text-red-500"
+            : "text-gray-600",
+        )}
+      />
+    </button>
+  </div>
 
-                    {/* Wishlist Icon */}
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleWishlist(product.id);
-                      }}
-                      className="absolute top-3 right-3 p-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-gray-100 active:scale-90"
-                    >
-                      <Heart 
-                        className={cn(
-                          "w-4 h-4 transition-colors",
-                          wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"
-                        )} 
-                      />
-                    </button>
-                  </div>
+  {/* --- DETAILS SECTION (Updated) --- */}
+  <div className="p-4 flex flex-col flex-grow gap-3">
+    {/* Product Name */}
+    <h3 className="text-base font-semibold line-clamp-1 text-gray-900">
+      {product?.name}
+    </h3>
 
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-medium text-gray-900 line-clamp-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 line-clamp-2">
-                      {product.description}
-                    </p>
+    {/* Spacer to push content to the bottom */}
+    <div className="flex-grow" />
 
-                    <div className="flex items-center gap-1 py-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="w-3 h-3 fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
-                      <span className="text-xs text-gray-500 ml-1">(24)</span>
-                    </div>
+      <p className="text-xl font-bold text-gray-900 whitespace-nowrap">
+        ${product.price.toLocaleString()}
+      </p>
+    <div className="flex items-center justify-between gap-4 mt-2">
+      {/* Bigger Price */}
 
-                    <p className="text-base font-semibold text-gray-900">
-                      ${product.price.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
+      {/* Bigger Button with Icon */}
+       <Button
+      onClick={(e) => {
+        e.stopPropagation();
+        handleOpenDetails(product);
+      }}
+      size="lg" // Larger padding
+      className="w-full rounded-lg bg-black text-white hover:bg-gray-800 transition-colors active:scale-95"
+    >
+      Add to Cart
+    </Button>
+    </div>
+  </div>
+</div>
               ))}
             </div>
           )}
@@ -325,15 +385,13 @@ export default function ProductsPage() {
         )}
       </div>
 
-     <Footer />
-
-     <ProductDetailModal 
+      <ProductDetailModal
         product={selectedProduct}
         isOpen={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}
-     />
+      />
 
-     <WishlistDrawer
+      <WishlistDrawer
         isOpen={isWishlistOpen}
         onClose={() => setIsWishlistOpen(false)}
         items={wishlistItems}
@@ -342,7 +400,7 @@ export default function ProductsPage() {
           setIsWishlistOpen(false);
           setSelectedProduct(product);
         }}
-     />
+      />
     </div>
   );
 }

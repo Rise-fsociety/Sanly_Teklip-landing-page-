@@ -39,12 +39,15 @@ export function Header() {
     e: React.MouseEvent<HTMLAnchorElement>,
     link: any,
   ) => {
-    if (link.href.startsWith("/#")) {
-      // If we are already on home, scroll. Otherwise let the Link component handle it.
-      if (window.location.pathname === "/") {
-        e.preventDefault();
-        scrollTo(link.href.replace("/", ""));
-      }
+    const isHomePage = window.location.pathname === "/";
+    const targetHash = link.href.includes("#") ? link.href.split("#")[1] : null;
+
+    if (link.href.startsWith("/#") && isHomePage && targetHash) {
+      e.preventDefault();
+      scrollTo(`#${targetHash}`);
+      
+      window.history.pushState(null, "", `/#${targetHash}`);
+    } else if (link.href === "/products") {
     }
   };
 

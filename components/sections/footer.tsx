@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin} from "lucide-react";
+import { FaTiktok, FaInstagram } from 'react-icons/fa';
 
 const IconInstagram = () => (
   <svg
@@ -21,18 +22,16 @@ const IconInstagram = () => (
   </svg>
 );
 
+  
+
 const footerNav = [
   {
     heading: "Nawigasiýa",
     links: [
-      { label: "Biz Hakda", href: "#about" },
-      { label: "Hyzmatlar", href: "#services" },
-      { label: "Tehnologiýalar", href: "#tools" },
-      {
-        label: "Harytlar",
-        href: "https://sanlyteklip.com.tm/ru/ag",
-        featured: true,
-      },
+      { label: "Biz Hakda", href: "/#about" },
+      { label: "Hyzmatlar", href: "/#services" },
+      { label: "Tehnologiýalar", href: "/#tools" },
+      { label: "Harytlar", href: "/products" },
     ],
   },
   {
@@ -49,13 +48,8 @@ const footerNav = [
     heading: "Habarlaşmak",
     links: [
       {
-        label: "geldi@akhasap.com",
-        href: "mailto:geldi@akhasap.com",
-        icon: Mail,
-      },
-      {
-        label: "sanlyteklip@sanlyteklip.tm",
-        href: "mailto:sanlyteklip@sanlyteklip.tm",
+        label: "sanlyteklip@sanlyteklip.com.tm",
+        href: "mailto:sanlyteklip@sanlyteklip.com.tm",
         icon: Mail,
       },
       { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
@@ -68,7 +62,8 @@ const footerNav = [
   },
 ];
 
-const socials = [{ Icon: IconInstagram, href: "#", label: "Instagram" }];
+
+import { useSmoothScroll } from "@/context/smooth-scroll-context";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -81,6 +76,18 @@ const fadeUp: Variants = {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { scrollTo } = useSmoothScroll();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isHomePage = window.location.pathname === "/";
+    const targetHash = href.includes("#") ? href.split("#")[1] : null;
+
+    if (href.startsWith("/#") && isHomePage && targetHash) {
+      e.preventDefault();
+      scrollTo(`#${targetHash}`);
+      window.history.pushState(null, "", `/#${targetHash}`);
+    }
+  };
 
   return (
     <footer className="bg-[#0157A4] text-white overflow-hidden">
@@ -105,13 +112,22 @@ export function Footer() {
               Siziň biznesiňizi sanly dünýäde ösdürmek üçin döwrebap tehnologiki
               çözgütleri hödürleýäris. Ideýaňyzy biziň bilen hakykata öwüriň.
             </p>
-            <Link
+          <div className="flex items-center gap-4">
+          <Link
               href="https://www.instagram.com/sanlyteklip/"
               target="_blank"
               rel="noopener noreferrer"
               >
-              <IconInstagram  />
+              <FaInstagram size={32} className="text-white" />
             </Link>
+            <Link
+              href="https://www.tiktok.com/@sanly.teklip8"
+              target="_blank"
+              rel="noopener noreferrer"
+              >
+                <FaTiktok size={32} className="text-white"/>
+            </Link>
+          </div>
           </motion.div>
 
           {footerNav.map((col, colIdx) => (
@@ -136,18 +152,13 @@ export function Footer() {
                           <a
                             href={link.href}
                             target="_blank"
-                            className="inline-flex items-center gap-2 mt-1 px-4 py-2 rounded-xl font-bold text-base md:text-lg
-                              bg-white text-brand-blue shadow-lg
-                              hover:bg-yellow-300 hover:text-slate-900
-                              transition-all duration-300
-                              animate-pulse hover:animate-none
-                              ring-2 ring-white/40 hover:ring-yellow-300"
                           >
                             {link.label}
                           </a>
                         ) : (
                           <Link
                             href={link.href}
+                            onClick={(e) => handleNavClick(e, link.href)}
                             className="text-base md:text-lg text-white/80 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
                           >
                             {Icon && (
