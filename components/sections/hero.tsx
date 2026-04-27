@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import Antigravity from "../Antigravity";
 import TextType from "../textType/TextType";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
-  const titleText = "Sanly Teklip";
+  const t = useTranslations('Hero');
+  const titleText = t('title');
   const titleDelay = 1.0;
 
   return (
@@ -46,10 +48,10 @@ export function Hero() {
             showCursor
             cursorCharacter="_"
             texts={[
-              "Sanly çözgütler.",
-              "Ygtybarly hyzmatlar.",
-              "Akhasap hyzmatlar.",
-              "Sanly Marketing.",
+              t('type1'),
+              t('type2'),
+              t('type3'),
+              t('type4'),
             ]}
             deletingSpeed={50}
             variableSpeed={{ min: 60, max: 120 }}
@@ -58,7 +60,7 @@ export function Hero() {
         </motion.div>
 
         <h1 className="text-5xl md:text-9xl font-black mb-8 leading-tight drop-shadow-sm bg-gradient-to-r from-[#3AB4FF] to-[#0157A4] bg-clip-text text-transparent">
-          {titleText.split("").map((char, index) => (
+          {"Sanly Teklip".split("").map((char, index) => (
             <motion.span
               key={index}
               initial={{ opacity: 0 }}
@@ -80,7 +82,7 @@ export function Hero() {
           transition={{ delay: titleDelay, duration: 0.8, ease: "easeOut" }}
           className="text-2xl md:text-4xl text-slate-600 font-medium mb-12 tracking-wide uppercase"
         >
-          gelejegiň ýoly
+         {titleText}
         </motion.p>
       </div>
 

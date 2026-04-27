@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Star, Shield, Zap, Globe, Check } from "lucide-react";
+import { X, Shield, Zap, Globe, Check } from "lucide-react";
 import Image from "next/image";
-import { Product } from "@/context/cart-context";
+import { Product, useCart } from "@/context/cart-context";
+import { AddToCart } from "./products/AddToCart";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
@@ -14,6 +15,7 @@ interface ProductDetailModalProps {
 }
 
 export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailModalProps) {
+  const { addToCart, setIsOpen: setIsCartOpen } = useCart();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -32,7 +34,6 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -116,10 +117,8 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
                   </div>
                 </div>
 
-                <div className="pt-4 flex gap-4">
-                  <Button className="flex-1 bg-gradient-to-r from-[#0157A4] to-[#3AB4FF] hover:from-[#3AB4FF] hover:to-[#0157A4] text-white h-14 rounded-xl font-bold text-lg border-0">
-                    Contact for Inquiry
-                  </Button>
+                <div className="pt-4 flex flex-col sm:flex-row gap-4">
+                  <AddToCart product={product} className="flex-1" />
                 </div>
               </div>
             </div>

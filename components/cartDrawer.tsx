@@ -5,31 +5,16 @@ import { X, ShoppingCart, Trash2, Plus, Minus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export function CartDrawer() {
   const { cart, isOpen, setIsOpen, removeFromCart, updateQuantity, totalPrice, totalItems } = useCart();
 
   return (
     <>
-      {/* Trigger Button - Floating */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-primary text-primary-foreground shadow-2xl flex items-center justify-center hover:scale-110 transition-transform"
-      >
-        <ShoppingCart className="w-6 h-6" />
-        {totalItems > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-background">
-            {totalItems}
-          </span>
-        )}
-      </motion.button>
-
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -37,14 +22,12 @@ export function CartDrawer() {
               onClick={() => setIsOpen(false)}
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[60]"
             />
-
-            {/* Drawer */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-card border-l border-border z-[70] shadow-2xl flex flex-col"
+              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white border-l border-border z-[70] shadow-2xl flex flex-col"
             >
               {/* Header */}
               <div className="p-6 border-b border-border flex items-center justify-between">
@@ -130,9 +113,13 @@ export function CartDrawer() {
                     <span className="text-muted-foreground">Subtotal</span>
                     <span className="text-2xl font-bold">${totalPrice}</span>
                   </div>
-                  <Button className="w-full h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20">
+                  <Link  
+                    onClick={() => setIsOpen(false)} 
+                    href="/shopping-cart" 
+                    className="w-full h-14 rounded-2xl text-lg font-black uppercase tracking-tighter shadow-xl shadow-blue-500/20 bg-[#3AB4FF] text-white flex items-center justify-center hover:bg-blue-600 transition-all active:scale-95"
+                  >
                     Proceed to Checkout
-                  </Button>
+                  </Link>
                   <p className="text-center text-xs text-muted-foreground mt-4">
                     Shipping and taxes calculated at checkout
                   </p>

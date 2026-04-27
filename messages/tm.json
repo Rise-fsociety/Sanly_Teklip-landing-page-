@@ -1,0 +1,31 @@
+{
+  "Header": {
+    "about": "Biz Hakda",
+    "services": "Hyzmatlar",
+    "tools": "Tehnologiýalar",
+    "products": "Harytlar",
+    "cart": "Sebet",
+    "language": "Dil"
+  },
+  "Cart": {
+    "checkout": "Sargyt etmek",
+    "delivery": "Eltip bermek",
+    "items": "Harytlar",
+    "total": "Jemi",
+    "placeholderName": "Adyňyz",
+    "placeholderPhone": "Telefon belgiňiz",
+    "placeholderAddress": "Salgyňyz",
+    "placeholderNotes": "Bellikler"
+  },
+  "Products": {
+    "add": "Sebede goş",
+    "added": "Haryt goşuldy"
+  },
+  "Hero": {
+    "title": "Gelejegiň ýoly",
+    "type1": "Sanly çözgütler.",
+    "type2": "Ygtybarly hyzmatlar.",
+    "type3": "Akhasap hyzmatlar.",
+    "type4": "Sanly Marketing."
+  }
+}

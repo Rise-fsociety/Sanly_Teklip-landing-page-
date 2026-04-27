@@ -1,0 +1,31 @@
+{
+  "Header": {
+    "about": "О нас",
+    "services": "Услуги",
+    "tools": "Технологии",
+    "products": "Продукты",
+    "cart": "Корзина",
+    "language": "Язык"
+  },
+  "Cart": {
+    "checkout": "Оформить заказ",
+    "delivery": "Доставка",
+    "items": "Товары",
+    "total": "Итого",
+    "placeholderName": "Ваше имя",
+    "placeholderPhone": "Ваш номер",
+    "placeholderAddress": "Ваш адрес",
+    "placeholderNotes": "Заметки"
+  },
+  "Products": {
+    "add": "Добавить в корзину",
+    "added": "Товар добавлен"
+  },
+  "Hero": {
+    "title": "Путь в будущее",
+    "type1": "Цифровые решения.",
+    "type2": "Надежные услуги.",
+    "type3": "Услуги Akhasap.",
+    "type4": "Цифровой маркетинг."
+  }
+}

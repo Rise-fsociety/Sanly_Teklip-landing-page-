@@ -1,0 +1,31 @@
+{
+  "Header": {
+    "about": "About Us",
+    "services": "Services",
+    "tools": "Technologies",
+    "products": "Products",
+    "cart": "Cart",
+    "language": "Language"
+  },
+  "Cart": {
+    "checkout": "Checkout",
+    "delivery": "Delivery",
+    "items": "Items",
+    "total": "Total",
+    "placeholderName": "Your Name",
+    "placeholderPhone": "Your Phone",
+    "placeholderAddress": "Your Address",
+    "placeholderNotes": "Notes"
+  },
+  "Products": {
+    "add": "Add to Cart",
+    "added": "Product Added"
+  },
+  "Hero": {
+    "title": "Path to the future",
+    "type1": "Digital solutions.",
+    "type2": "Reliable services.",
+    "type3": "Akhasap services.",
+    "type4": "Digital Marketing."
+  }
+}

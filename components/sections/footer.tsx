@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link, usePathname } from "@/i18n/navigation";
 import { motion, type Variants } from "framer-motion";
 import { Mail, Phone, MapPin} from "lucide-react";
 import { FaTiktok, FaInstagram } from 'react-icons/fa';
@@ -77,15 +77,16 @@ const fadeUp: Variants = {
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const { scrollTo } = useSmoothScroll();
+  const pathname = usePathname();
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isHomePage = window.location.pathname === "/";
+    const isHomePage = pathname === "/";
     const targetHash = href.includes("#") ? href.split("#")[1] : null;
 
     if (href.startsWith("/#") && isHomePage && targetHash) {
       e.preventDefault();
       scrollTo(`#${targetHash}`);
-      window.history.pushState(null, "", `/#${targetHash}`);
+      window.history.pushState(null, "", `#${targetHash}`);
     }
   };
 

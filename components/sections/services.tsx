@@ -5,10 +5,8 @@ import {
   Globe, 
   Smartphone, 
   Cpu, 
-  Palette, 
   Lightbulb, 
   MonitorSmartphone,
-  LayoutDashboard,
   HandCoins
 } from "lucide-react";
 import { MagicCard } from "../ui/magic-card";
@@ -36,7 +34,7 @@ const services = [
   },
   {
     title: "Akhasap",
-    description: "Maliýe, dermanhana, kafe we işgärleri dolandyrmak ýaly ähli amallaryňyzy bir platformada jemläň",
+    description: "Maliýe, dermanhana, kafe we işgärleri dolandyrmak ýaly amallary ýeňilleşdirýär.",
     icon: HandCoins,
   },
   {
@@ -57,10 +55,10 @@ export function Services() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 text-slate-900 tracking-tight">
             Hyzmatlarymyz
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-600 font-medium">
+          <p className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-slate-600 font-medium">
             Biz siziň ideýalaryňyzy sanly dünýäde janlandyrmak üçin dürli görnüşli tehnologiki çözgütleri hödürleýäris.
           </p>
         </motion.div>
@@ -85,10 +83,10 @@ export function Services() {
                   <div className="mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     <service.icon className="w-8 h-8 text-slate-700 transition-colors duration-300 group-hover:text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-slate-900">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-4 text-slate-900">
                     {service.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed text-center font-medium">
+                  <p className="text-sm md:text-base text-slate-600 leading-relaxed text-center font-medium">
                     {service.description}
                   </p>
                 </div>

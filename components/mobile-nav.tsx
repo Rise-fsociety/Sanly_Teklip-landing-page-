@@ -1,17 +1,21 @@
+"use client";
+
 import { cn } from "@/lib/utils";
-import React from "react";
 import { Portal, PortalBackdrop } from "@/components/ui/portal";
 import { Button } from "@/components/ui/button";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { XIcon, MenuIcon } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { navLinks } from "./header";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 export function MobileNav() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const activeSection = useActiveSection(
     navLinks.map((link) => link.href.replace("/#", "")),
   );
+  const t = useTranslations('Header');
 
   return (
     <div className="md:hidden">
@@ -31,8 +35,8 @@ export function MobileNav() {
         )}
       </Button>
       {open && (
-        <Portal className="top-14" id="mobile-menu">
-          <PortalBackdrop />
+        <Portal id="mobile-menu">
+          <PortalBackdrop onClick={() => setOpen(false)} />
           <div
             className={cn(
               "data-[slot=open]:zoom-in-97 ease-out data-[slot=open]:animate-in",
@@ -40,6 +44,12 @@ export function MobileNav() {
             )}
             data-slot={open ? "open" : "closed"}
           >
+            <div className="flex justify-end mb-4">
+              <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+                <XIcon className="size-6" />
+              </Button>
+            </div>
+
             <div className="grid gap-y-4">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.replace("/#", "");
@@ -50,11 +60,11 @@ export function MobileNav() {
                       "justify-start text-xl font-medium",
                       isActive ? "text-brand-blue" : "text-slate-600",
                     )}
-                    key={link.label}
+                    key={link.key}
                     variant="ghost"
                     onClick={() => setOpen(false)}
                   >
-                    <Link href={link.href}>{link.label}</Link>
+                    <Link href={link.href}>{t(link.key)}</Link>
                   </Button>
                 );
               })}
