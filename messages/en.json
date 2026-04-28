@@ -27,5 +27,42 @@
     "type2": "Reliable services.",
     "type3": "Akhasap services.",
     "type4": "Digital Marketing."
+  },
+  "About": {
+    "subtitle": "Center of dynamic and innovative digital solutions.",
+    "desc1": "We don't just write code, we create <blue>Akhasap</blue> Trading and production automation services.",
+    "desc2": "Through high-quality programs and <blue>Akhasap</blue>, our partners achieve new successes.",
+    "terminal_title": "Sanly Teklip IT Company",
+    "mission_label": "// Our mission:",
+    "mission_text": "To be your most reliable partner in the digital world and to implement innovations.",
+    "services_label": "// Services:",
+    "service1": "→ Professional Web Platforms",
+    "service2": "→ Innovative Mobile Applications",
+    "service3": "→ Akhasap",
+    "footer": "Let's step into the future together!"
+  },
+  "ServicesSection": {
+    "title": "Our Services",
+    "subtitle": "We offer various technological solutions to bring your ideas to life in the digital world.",
+    "web": "Websites",
+    "web_desc": "We create modern and fast-performing websites and platforms.",
+    "android": "Android",
+    "android_desc": "We develop high-quality Android mobile applications for your business.",
+    "ios": "iOS",
+    "ios_desc": "iOS applications that offer the best experiences for iPhone and iPad users.",
+    "computer": "Computer Services",
+    "computer_desc": "Technical support, computer configuration and software installation services.",
+    "akhasap": "Akhasap",
+    "akhasap_desc": "It simplifies operations like finance, pharmacy, cafe and staff management.",
+    "consulting": "IT Consulting",
+    "consulting_desc": "We provide the best IT advice to grow your business in the digital world."
+  },
+  "Partners": {
+    "title": "Who we work with",
+    "subtitle": "Meet our reliable partners."
+  },
+  "Tools": {
+    "title": "Our Technologies",
+    "subtitle": "We create the best solutions by using modern Frontend and Backend technologies."
   }
 }

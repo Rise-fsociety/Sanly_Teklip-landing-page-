@@ -27,5 +27,42 @@
     "type2": "Ygtybarly hyzmatlar.",
     "type3": "Akhasap hyzmatlar.",
     "type4": "Sanly Marketing."
+  },
+  "About": {
+    "subtitle": "Dinamiki we innowasion sanly çözgütler merkezi.",
+    "desc1": "Biz diňe bir programma däl, eýsem <blue>Akhasap</blue> Söwda we önümçilik awtomatlaşdyrma hyzmatlaryny döredýäris.",
+    "desc2": "Ýokary hilli programmalar we <blue>Akhasap</blue> arkaly biziň hyzmatdaşlarymyz täze üstünliklere ýetýärler.",
+    "terminal_title": "Sanly Teklip IT Kompaniýasy",
+    "mission_label": "// Missiýamyz:",
+    "mission_text": "Sanly dünýäde siziň iň ygtybarly hyzmatdaşyňyz bolmak we innowasiýalary durmuşa geçirmek.",
+    "services_label": "// Hyzmatlar:",
+    "service1": "→ Professional Web Platformalar",
+    "service2": "→ Innowasion Mobil Programalar",
+    "service3": "→ Akhasap",
+    "footer": "Geliň, geljege bilelikde ädim ädeliň!"
+  },
+  "ServicesSection": {
+    "title": "Hyzmatlarymyz",
+    "subtitle": "Biz siziň ideýalaryňyzy sanly dünýäde janlandyrmak üçin dürli görnüşli tehnologiki çözgütleri hödürleýäris.",
+    "web": "Web-saýt",
+    "web_desc": "Döwrebap we tiz işleýän web-saýtlary we platformalary döredýäris.",
+    "android": "Android",
+    "android_desc": "Siziň biznesiňiz üçin ýokary hilli Android mobil goşundylaryny işläp düzýäris.",
+    "ios": "iOS",
+    "ios_desc": "iPhone we iPad ulanyjylary üçin iň oňat tejribeleri hödürleýän iOS goşundylary.",
+    "computer": "Kompýuter Hyzmatlary",
+    "computer_desc": "Tehniki goldaw, kompýuterleri sazlamak we programmalary gurnamak hyzmatlary.",
+    "akhasap": "Akhasap",
+    "akhasap_desc": "Maliýe, dermanhana, kafe we işgärleri dolandyrmak ýaly amallary ýeňilleşdirýär.",
+    "consulting": "IT Konsultasiýa",
+    "consulting_desc": "Sanly dünýäde biznesiňizi ösdürmek üçin iň oňat IT maslahatlaryny berýäris."
+  },
+  "Partners": {
+    "title": "Biz bilen işleýänler",
+    "subtitle": "Ygtybarly hyzmatdaşlarymyz bilen tanyşyň."
+  },
+  "Tools": {
+    "title": "Tehnologiýalarymyz",
+    "subtitle": "Biz döwrebap Frontend we Backend tehnologiýalaryny ulanmak bilen iň oňat çözgütleri döredýäris."
   }
 }

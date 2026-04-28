@@ -6,9 +6,10 @@ import {
   AnimatedSpan,
   TypingAnimation,
 } from "@/components/ui/terminal";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function About() {
+  const t = useTranslations('About');
   return (
     <section id="about" className="py-24 bg-transparent relative">
       <div className="container mx-auto px-4">
@@ -25,15 +26,14 @@ export function About() {
             </h2>
             <div className="space-y-8">
               <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight tracking-tight">
-                Dinamiki we innowasion sanly çözgütler merkezi.
+                {t('subtitle')}
               </p>
               <div className="space-y-6 text-xl md:text-2xl text-slate-600 leading-relaxed max-w-lg">
                 <p>
-                  Biz diňe bir programma däl, eýsem <span className="text-brand-blue font-bold">Akhasap</span> Söwda we önümçilik awtomatlaşdyrma hyzmatlaryny döredýäris.
+                  {t.rich('desc1', { blue: (chunks) => <span className="text-brand-blue font-bold">{chunks}</span> })}
                 </p>
                 <p>
-                  Ýokary hilli programmalar we <span className="text-brand-blue font-bold">Akhasap</span> arkaly
-                  biziň hyzmatdaşlarymyz täze üstünliklere ýetýärler.
+                  {t.rich('desc2', { blue: (chunks) => <span className="text-brand-blue font-bold">{chunks}</span> })}
                 </p>
               </div>
             </div>
@@ -53,14 +53,14 @@ export function About() {
                 delay={200}
                 className="text-xl md:text-3xl font-bold text-slate-900"
               >
-                <span>Sanly Teklip IT Kompaniýasy</span>
+                <span>{t('terminal_title')}</span>
               </AnimatedSpan>
 
               <AnimatedSpan
                 delay={400}
                 className="text-lg text-slate-500 font-mono mt-4 italic"
               >
-                <span>// Missiýamyz:</span>
+                <span>{t('mission_label')}</span>
               </AnimatedSpan>
 
               <AnimatedSpan
@@ -68,8 +68,7 @@ export function About() {
                 className="text-xl text-slate-800 leading-snug"
               >
                 <span>
-                  Sanly dünýäde siziň iň ygtybarly hyzmatdaşyňyz bolmak we
-                  innowasiýalary durmuşa geçirmek.
+                  {t('mission_text')}
                 </span>
               </AnimatedSpan>
 
@@ -77,28 +76,28 @@ export function About() {
                 delay={800}
                 className="text-lg text-slate-500 font-mono mt-4 italic"
               >
-                <span>// Hyzmatlar:</span>
+                <span>{t('services_label')}</span>
               </AnimatedSpan>
 
               <AnimatedSpan
                 delay={1000}
                 className="text-xl text-brand-blue font-bold"
               >
-                <span>→ Professional Web Platformalar</span>
+                <span>{t('service1')}</span>
               </AnimatedSpan>
 
               <AnimatedSpan
                 delay={1200}
                 className="text-xl text-brand-blue font-bold"
               >
-                <span>→ Innowasion Mobil Programalar</span>
+                <span>{t('service2')}</span>
               </AnimatedSpan>
 
               <AnimatedSpan
                 delay={1400}
                 className="text-xl text-brand-blue font-bold"
               >
-                <span>→ Akhasap</span>
+                <span>{t('service3')}</span>
               </AnimatedSpan>
 
               <TypingAnimation
@@ -106,7 +105,7 @@ export function About() {
                 duration={30}
                 className="text-xl font-black text-indigo-600 mt-8 leading-tight"
               >
-                Geliň, geljege bilelikde ädim ädeliň!
+                {t('footer')}
               </TypingAnimation>
             </Terminal>
           </motion.div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import LogoLoop from "../logoLoop/LogoLoop";
+import { useTranslations } from "next-intl";
 
 const partnerLogos = [
   { src: "/Akhasap.png",     alt: "Akhasap",      title: "Akhasap"      },
@@ -12,6 +13,7 @@ const partnerLogos = [
 ];
 
 export function Partners() {
+  const t = useTranslations('Partners');
   return (
     <section id="partners" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 mb-14">
@@ -23,10 +25,10 @@ export function Partners() {
           className="text-center"
         >
           <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">
-            Biz bilen işleýänler
+            {t('title')}
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-slate-600 font-medium">
-            Ygtybarly hyzmatdaşlarymyz bilen tanyşyň.
+            {t('subtitle')}
           </p>
         </motion.div>
       </div>

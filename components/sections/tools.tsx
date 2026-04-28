@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { useTranslations } from "next-intl";
 import {
   SiNextdotjs,
   SiVuedotjs,
@@ -64,6 +65,7 @@ export function Tools() {
   const pgRef = useRef<HTMLDivElement>(null);
   const dockerRef = useRef<HTMLDivElement>(null);
   const akhasapRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations('Tools');
 
   return (
     <section id="tools" className="py-24 bg-transparent overflow-hidden relative">
@@ -76,15 +78,13 @@ export function Tools() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">
-            Tehnologiýalarymyz
+            {t('title')}
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-slate-600 font-medium">
-            Biz döwrebap Frontend we Backend tehnologiýalaryny ulanmak bilen iň
-            oňat çözgütleri döredýäris.
+            {t('subtitle')}
           </p>
         </motion.div>
 
-        {/* Responsive Container */}
         <div
           className="relative flex h-auto min-h-[500px] md:h-[600px] w-full items-center justify-center overflow-hidden rounded-3xl border bg-slate-50/50 p-4 md:p-10 md:shadow-inner"
           ref={containerRef}

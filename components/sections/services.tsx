@@ -10,41 +10,19 @@ import {
   HandCoins
 } from "lucide-react";
 import { MagicCard } from "../ui/magic-card";
+import { useTranslations } from "next-intl";
 
-const services = [
-  {
-    title: "Web-saýt",
-    description: "Döwrebap we tiz işleýän web-saýtlary we platformalary döredýäris.",
-    icon: Globe,
-  },
-  {
-    title: "Android",
-    description: "Siziň biznesiňiz üçin ýokary hilli Android mobil goşundylaryny işläp düzýäris.",
-    icon: Smartphone,
-  },
-  {
-    title: "iOS",
-    description: "iPhone we iPad ulanyjylary üçin iň oňat tejribeleri hödürleýän iOS goşundylary.",
-    icon: MonitorSmartphone,
-  },
-  {
-    title: "Kompýuter Hyzmatlary",
-    description: "Tehniki goldaw, kompýuterleri sazlamak we programmalary gurnamak hyzmatlary.",
-    icon: Cpu,
-  },
-  {
-    title: "Akhasap",
-    description: "Maliýe, dermanhana, kafe we işgärleri dolandyrmak ýaly amallary ýeňilleşdirýär.",
-    icon: HandCoins,
-  },
-  {
-    title: "IT Konsultasiýa",
-    description: "Sanly dünýäde biznesiňizi ösdürmek üçin iň oňat IT maslahatlaryny berýäris.",
-    icon: Lightbulb,
-  },
+const servicesKeys = [
+  { key: "web", icon: Globe },
+  { key: "android", icon: Smartphone },
+  { key: "ios", icon: MonitorSmartphone },
+  { key: "computer", icon: Cpu },
+  { key: "akhasap", icon: HandCoins },
+  { key: "consulting", icon: Lightbulb },
 ];
 
 export function Services() {
+  const t = useTranslations('ServicesSection');
   return (
     <section id="services" className="md:py-24 bg-transparent overflow-hidden">
       <div className="container mx-auto px-4">
@@ -56,17 +34,17 @@ export function Services() {
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 text-slate-900 tracking-tight">
-            Hyzmatlarymyz
+            {t('title')}
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-slate-600 font-medium">
-            Biz siziň ideýalaryňyzy sanly dünýäde janlandyrmak üçin dürli görnüşli tehnologiki çözgütleri hödürleýäris.
+            {t('subtitle')}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {servicesKeys.map((service, index) => (
             <motion.div
-              key={service.title}
+              key={service.key}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.8 }}
@@ -84,10 +62,10 @@ export function Services() {
                     <service.icon className="w-8 h-8 text-slate-700 transition-colors duration-300 group-hover:text-white" />
                   </div>
                   <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-4 text-slate-900">
-                    {service.title}
+                    {t(service.key)}
                   </h3>
                   <p className="text-sm md:text-base text-slate-600 leading-relaxed text-center font-medium">
-                    {service.description}
+                    {t(`${service.key}_desc`)}
                   </p>
                 </div>
               </MagicCard>
