@@ -1,8 +1,8 @@
 "use client";
 
-import { Search, Home, Heart, ShoppingCart, User } from "lucide-react";
+import { Search, Home, Heart} from "lucide-react";
 import { useCart } from "@/context/cart-context";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -25,6 +25,7 @@ export function StoreHeader({
 }: StoreHeaderProps) {
   const { setIsOpen: setIsCartOpen, totalItems } = useCart();
   const locale = useLocale();
+  const t = useTranslations("Header");
   const router = useRouter();
   const pathname = usePathname();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -43,7 +44,7 @@ export function StoreHeader({
               className="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-gray-600 transition-colors"
             >
               <Home className="w-4 h-4" />
-              <span className="hidden sm:inline">Back to Home</span>
+              <span className="hidden sm:inline">{t("backHome")}</span>
             </Link>
 
             {showSearch && (
@@ -52,7 +53,7 @@ export function StoreHeader({
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search products..."
+                    placeholder={t("searchPlaceholder")}
                     value={searchQuery}
                     onChange={(e) => onSearchChange?.(e.target.value)}
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-black transition-colors"
@@ -109,24 +110,10 @@ export function StoreHeader({
                   </span>
                 )}
               </button>
-
-              <button
-                onClick={() => setIsLoginModalOpen(true)}
-                className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <User className="w-5 h-5 text-slate-600" />
-              </button>
-
               <button
                 onClick={() => setIsCartOpen(true)}
                 className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
-                <ShoppingCart className="w-5 h-5 text-slate-600" />
-                {totalItems > 0 && (
-                  <span className="absolute top-0 right-0 w-4 h-4 bg-[#0157A4] text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-                    {totalItems}
-                  </span>
-                )}
               </button>
             </div>
           </div>
@@ -137,7 +124,7 @@ export function StoreHeader({
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search products..."
+                  placeholder={t("searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => onSearchChange?.(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-black transition-colors"

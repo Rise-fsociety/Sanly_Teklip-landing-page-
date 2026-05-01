@@ -5,9 +5,9 @@ import { Portal, PortalBackdrop } from "@/components/ui/portal";
 import { Button } from "@/components/ui/button";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { XIcon, MenuIcon } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { navLinks } from "./header";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 
 export function MobileNav() {
@@ -16,6 +16,14 @@ export function MobileNav() {
     navLinks.map((link) => link.href.replace("/#", "")),
   );
   const t = useTranslations('Header');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleLanguageChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale, scroll: false });
+    setOpen(false);
+  };
 
   return (
     <div className="md:hidden">
@@ -68,6 +76,29 @@ export function MobileNav() {
                   </Button>
                 );
               })}
+            </div>
+
+            <div className="mt-auto pt-8 border-t border-gray-100">
+              <p className="text-xs font-bold text-gray-400 mb-4 px-4 uppercase tracking-wider">{t("language")}</p>
+              <div className="flex flex-col gap-2">
+                {[
+                  { id: "tm", label: "Türkmen dili" },
+                  { id: "ru", label: "Русский язык" },
+                  { id: "en", label: "English" },
+                ].map((lang) => (
+                  <Button
+                    key={lang.id}
+                    variant="ghost"
+                    className={cn(
+                      "justify-start text-lg font-medium",
+                      locale === lang.id ? "text-brand-blue" : "text-slate-600"
+                    )}
+                    onClick={() => handleLanguageChange(lang.id)}
+                  >
+                    {lang.label}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
         </Portal>

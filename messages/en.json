@@ -5,7 +5,9 @@
     "tools": "Technologies",
     "products": "Products",
     "cart": "Cart",
-    "language": "Language"
+    "language": "Language",
+    "searchPlaceholder": "Search Products...",
+    "backHome": "Back to home"
   },
   "Cart": {
     "checkout": "Checkout",
@@ -61,8 +63,35 @@
     "title": "Who we work with",
     "subtitle": "Meet our reliable partners."
   },
+  "Wishlist": {
+    "title": "My Favorites",
+    "empty": "Your wishlist is empty",
+    "emptyDesc": "Save items you love here to find them later.",
+    "continue": "Continue Shopping"
+  },
+  "Footer": {
+    "description": "We offer modern technological solutions to grow your business in the digital world. Turn your idea into reality with us.",
+    "nav": "Navigation",
+    "about": "About Us",
+    "services": "Services",
+    "tools": "Technologies",
+    "products": "Products",
+    "web": "Web",
+    "android": "Android",
+    "ios": "iOS",
+    "akhasap": "Akhasap Services",
+    "consulting": "IT Consulting",
+    "contact": "Contact Us",
+    "address": "Ashgabat, Turkmenistan",
+    "rights": "All rights reserved."
+  },
   "Tools": {
     "title": "Our Technologies",
     "subtitle": "We create the best solutions by using modern Frontend and Backend technologies."
+  },
+  "ProductsPage": {
+    "title": "Products",
+    "description": "Discover our premium collection of enterprise-grade software and hardware solutions designed to accelerate your business growth.",
+    "allProducts": "All products"
   }
 }

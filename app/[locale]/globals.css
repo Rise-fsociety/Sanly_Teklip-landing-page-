@@ -51,3 +51,12 @@ html.lenis body {
   scrollbar-width: thin;
   scrollbar-color: #3AB4FF #f1f5f9;
 }
+
+@keyframes shimmer {
+  0% { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.4s infinite linear;
+}

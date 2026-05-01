@@ -8,6 +8,8 @@ export interface Product {
   price: number;
   image: string;
   description: string;
+  categoryName?: string;
+  originalData?: any;
 }
 
 export interface CartItem extends Product {

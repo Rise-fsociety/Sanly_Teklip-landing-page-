@@ -5,6 +5,7 @@ import { X, Heart, ShoppingBag, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { Product } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 interface WishlistDrawerProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ interface WishlistDrawerProps {
 }
 
 export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct }: WishlistDrawerProps) {
+  const t = useTranslations("Wishlist");
   return (
     <AnimatePresence>
       {isOpen && (
@@ -37,7 +39,7 @@ export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-red-500 fill-red-500" />
-                <h2 className="text-xl font-bold text-gray-900">My Favorites</h2>
+                <h2 className="text-xl font-bold text-gray-900">{t("title")}</h2>
                 <span className="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded-full">
                   {items.length}
                 </span>
@@ -57,16 +59,16 @@ export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct
                     <Heart className="w-10 h-10 text-gray-300" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900">Your wishlist is empty</h3>
+                    <h3 className="text-lg font-bold text-gray-900">{t("empty")}</h3>
                     <p className="text-gray-500 text-sm mt-1">
-                      Save items you love here to find them later.
+                      {t("emptyDesc")}
                     </p>
                   </div>
                   <Button 
                     onClick={onClose}
                     className="bg-gray-900 text-white hover:bg-black rounded-xl"
                   >
-                    Continue Shopping
+                    {t("continue")}
                   </Button>
                 </div>
               ) : (
@@ -92,10 +94,13 @@ export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct
                           >
                             {item.name}
                           </h4>
-                          <p className="text-sm text-gray-500 line-clamp-1">{item.description}</p>
+                           {item?.description && (
+                   <p className="text-sm text-gray-500 line-clamp-1">
+                    {item.description === "null" ? "-" : item.description}
+                  </p>
+                  )}
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="font-black">${item.price.toLocaleString()}</span>
                           <button
                             onClick={() => onRemove(item.id)}
                             className="text-gray-400 hover:text-red-500 transition-colors"

@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { motion, type Variants } from "framer-motion";
 import { Mail, Phone, MapPin} from "lucide-react";
 import { FaTiktok, FaInstagram } from 'react-icons/fa';
+import { useTranslations } from "next-intl";
 
 const IconInstagram = () => (
   <svg
@@ -22,47 +23,6 @@ const IconInstagram = () => (
   </svg>
 );
 
-  
-
-const footerNav = [
-  {
-    heading: "Nawigasiýa",
-    links: [
-      { label: "Biz Hakda", href: "/#about" },
-      { label: "Hyzmatlar", href: "/#services" },
-      { label: "Tehnologiýalar", href: "/#tools" },
-      { label: "Harytlar", href: "/products" },
-    ],
-  },
-  {
-    heading: "Hyzmatlar",
-    links: [
-      { label: "Web", href: "" },
-      { label: "Android", href: "" },
-      { label: "iOS", href: "" },
-      { label: "Akhasap Hyzmatlar", href: "" },
-      { label: "IT Konsultasiýa", href: "" },
-    ],
-  },
-  {
-    heading: "Habarlaşmak",
-    links: [
-      {
-        label: "sanlyteklip@sanlyteklip.com.tm",
-        href: "mailto:sanlyteklip@sanlyteklip.com.tm",
-        icon: Mail,
-      },
-      { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
-      {
-        label: "Aşgabat, Türkmenistan",
-        href: "#",
-        icon: MapPin,
-      },
-    ],
-  },
-];
-
-
 import { useSmoothScroll } from "@/context/smooth-scroll-context";
 
 const fadeUp: Variants = {
@@ -74,10 +34,51 @@ const fadeUp: Variants = {
   }),
 };
 
+  
+
 export function Footer() {
+  const t = useTranslations("Footer");
   const currentYear = new Date().getFullYear();
   const { scrollTo } = useSmoothScroll();
   const pathname = usePathname();
+
+  const footerNav = [
+    {
+      heading: t("nav"),
+      links: [
+        { label: t("about"), href: "/#about" },
+        { label: t("services"), href: "/#services" },
+        { label: t("tools"), href: "/#tools" },
+        { label: t("products"), href: "/products" },
+      ],
+    },
+    {
+      heading: t("services"),
+      links: [
+        { label: t("web"), href: "" },
+        { label: t("android"), href: "" },
+        { label: t("ios"), href: "" },
+        { label: t("akhasap"), href: "" },
+        { label: t("consulting"), href: "" },
+      ],
+    },
+    {
+      heading: t("contact"),
+      links: [
+        {
+          label: "sanlyteklip@sanlyteklip.com.tm",
+          href: "mailto:sanlyteklip@sanlyteklip.com.tm",
+          icon: Mail,
+        },
+        { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
+        {
+          label: t("address"),
+          href: "#",
+          icon: MapPin,
+        },
+      ],
+    },
+  ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const isHomePage = pathname === "/";
@@ -110,8 +111,7 @@ export function Footer() {
               className="mb-6 brightness-0 invert"
             />
             <p className="text-white/90 leading-relaxed text-base md:text-lg max-w-xs mb-8">
-              Siziň biznesiňizi sanly dünýäde ösdürmek üçin döwrebap tehnologiki
-              çözgütleri hödürleýäris. Ideýaňyzy biziň bilen hakykata öwüriň.
+              {t("description")}
             </p>
           <div className="flex items-center gap-4">
           <Link
@@ -185,7 +185,7 @@ export function Footer() {
         </div>
         <div className="my-6 md:my-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-base md:text-lg text-white/80">
-          <p>© {currentYear} Sanly Teklip. Ähli hukuklar goraglydyr.</p>
+          <p>© {currentYear} Sanly Teklip. {t("rights")}</p>
         </div>
       </div>
     </footer>

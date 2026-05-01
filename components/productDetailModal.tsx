@@ -65,6 +65,8 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
                   src={product.image}
                   alt={product.name}
                   fill
+                  unoptimized={true}
+                  referrerPolicy="no-referrer"
                   className="object-contain drop-shadow-2xl"
                 />
               </motion.div>
@@ -76,50 +78,17 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                     {product.name}
                   </h2>
-                  <p className="text-2xl font-black text-[#0157A4] mt-2">
-                    ${product.price.toLocaleString()}
-                  </p>
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest">
-                    Description
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {product.description} This enterprise-grade solution is designed to streamline your business operations and provide deep insights into your data. Built with the latest technologies to ensure maximum performance and security.
+                  {product.description && (
+                   <p className="text-gray-600 leading-relaxed">
+                    {product.description === "null" ? "-" : product.description}
                   </p>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 py-6 border-y border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-green-50 rounded-lg">
-                      <Shield className="w-4 h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm font-medium">Secure</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <Zap className="w-4 h-4 text-blue-600" />
-                    </div>
-                    <span className="text-sm font-medium">Fast</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-purple-50 rounded-lg">
-                      <Globe className="w-4 h-4 text-purple-600" />
-                    </div>
-                    <span className="text-sm font-medium">Scalable</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-orange-50 rounded-lg">
-                      <Check className="w-4 h-4 text-orange-600" />
-                    </div>
-                    <span className="text-sm font-medium">Verified</span>
-                  </div>
-                </div>
 
-                <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                  <AddToCart product={product} className="flex-1" />
-                </div>
               </div>
             </div>
           </motion.div>

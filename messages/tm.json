@@ -5,7 +5,9 @@
     "tools": "Tehnologiýalar",
     "products": "Harytlar",
     "cart": "Sebet",
-    "language": "Dil"
+    "language": "Dil",
+    "searchPlaceholder": "Haryt gözle...",
+    "backHome": "Başa sahypa"
   },
   "Cart": {
     "checkout": "Sargyt etmek",
@@ -61,8 +63,35 @@
     "title": "Biz bilen işleýänler",
     "subtitle": "Ygtybarly hyzmatdaşlarymyz bilen tanyşyň."
   },
+  "Wishlist": {
+    "title": "Halanlarym",
+    "empty": "Halanlaryňyz boş",
+    "emptyDesc": "Halaýan harytlaryňyzy soň tapmak üçin bu ýerde saklaň.",
+    "continue": "Söwdany dowam et"
+  },
+  "Footer": {
+    "description": "Siziň biznesiňizi sanly dünýäde ösdürmek üçin döwrebap tehnologiki çözgütleri hödürleýäris. Ideýaňyzy biziň bilen hakykata öwüriň.",
+    "nav": "Nawigasiýa",
+    "about": "Biz Hakda",
+    "services": "Hyzmatlar",
+    "tools": "Tehnologiýalar",
+    "products": "Harytlar",
+    "web": "Web",
+    "android": "Android",
+    "ios": "iOS",
+    "akhasap": "Akhasap Hyzmatlar",
+    "consulting": "IT Konsultasiýa",
+    "contact": "Habarlaşmak",
+    "address": "Aşgabat, Türkmenistan",
+    "rights": "Ähli hukuklar goraglydyr."
+  },
   "Tools": {
     "title": "Tehnologiýalarymyz",
     "subtitle": "Biz döwrebap Frontend we Backend tehnologiýalaryny ulanmak bilen iň oňat çözgütleri döredýäris."
+  },
+  "ProductsPage": {
+    "title": "Harytlar",
+    "description": "Telekeçiligiňizi ösdürmek üçin niýetlenen premium derejeli programma we enjamlaýyn çözgütlerimizi başdan geçiriň.",
+    "allProducts": "Ähli harytlar"
   }
 }

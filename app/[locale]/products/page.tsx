@@ -1,7 +1,7 @@
 "use client";
 
-import { Search, Home, Heart, ShoppingCart } from "lucide-react";
-import { Product, useCart } from "@/context/cart-context";
+import { Heart } from "lucide-react";
+import { Product} from "@/context/cart-context";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ProductDetailModal } from "@/components/productDetailModal";
@@ -10,95 +10,21 @@ import { cn } from "@/lib/utils";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { PromoCarousel } from "@/components/products/PromoCarousel";
-import { AddToCart } from "@/components/products/AddToCart";
-import { useLocale } from "next-intl";
-import { Link, useRouter, usePathname } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter, usePathname } from "@/i18n/navigation";
 import { StoreHeader } from "@/components/store-header";
-
-const categories = [
-  "All Products",
-  "Software",
-  "Hardware",
-  "Cloud",
-  "Security",
-];
-
-const staticProducts: Product[] = [
-  {
-    id: "1",
-    name: "Akar ERP System",
-    price: 1200,
-    image: "/Akar.png",
-    description:
-      "Enterprise resource planning solution for modern businesses with advanced analytics.",
-  },
-  {
-    id: "2",
-    name: "Akhasap Cloud",
-    price: 450,
-    image: "/Akhasap.png",
-    description:
-      "Secure and scalable cloud accounting software for financial management.",
-  },
-  {
-    id: "3",
-    name: "Archalyk Security",
-    price: 800,
-    image: "/Archalyk.webp",
-    description:
-      "Advanced cybersecurity suite for enterprise protection and threat detection.",
-  },
-  {
-    id: "4",
-    name: "Gosha Chynar Network",
-    price: 1500,
-    image: "/GoshaChynar.png",
-    description:
-      "High-performance networking hardware and software for seamless connectivity.",
-  },
-  {
-    id: "5",
-    name: "Akar Pro Suite",
-    price: 2200,
-    image: "/Akar.png",
-    description:
-      "Professional edition with advanced features and premium support included.",
-  },
-  {
-    id: "6",
-    name: "Akhasap Enterprise",
-    price: 850,
-    image: "/Akhasap.png",
-    description:
-      "Enterprise-grade cloud solution with unlimited storage and users.",
-  },
-  {
-    id: "7",
-    name: "Archalyk Premium",
-    price: 1400,
-    image: "/Archalyk.webp",
-    description:
-      "Premium security package with 24/7 monitoring and instant alerts.",
-  },
-  {
-    id: "8",
-    name: "Gosha Chynar Pro",
-    price: 2100,
-    image: "/GoshaChynar.png",
-    description:
-      "Professional networking solution with enterprise-level performance.",
-  },
-];
 
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("All Products");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isWishlistLoaded, setIsWishlistLoaded] = useState(false);
-  const { addToCart, setIsOpen: setIsCartOpen, totalItems } = useCart();
+  const [categories, setCategories] = useState<any[]>([]);
   const locale = useLocale();
+  const t = useTranslations("ProductsPage");
+  const h = useTranslations("Header");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -130,7 +56,7 @@ export default function ProductsPage() {
     );
   };
 
-   const handleLanguageChange = (newLocale: any) => {
+  const handleLanguageChange = (newLocale: any) => {
     router.replace(pathname, { locale: newLocale, scroll: false });
   };
 
@@ -138,13 +64,88 @@ export default function ProductsPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const wishlistItems = staticProducts.filter((p) => wishlist.includes(p.id));
+  const [rawApiProducts, setRawApiProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredProducts = staticProducts.filter((product) => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          "/api/excell/select/27",
+        );
+        const data = await response.json();
+
+        if (data.status === "success" && data.data?.tbl_mg_materials) {
+          setRawApiProducts(
+            data.data.tbl_mg_materials.filter((item: any) => item.material_id),
+          );
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("/api/Maincategory/select/join/gurlushyk");
+        const data = await response.json();
+        if (data.status === "success" && data.data?.mainCategorySelectJoin) {
+          // Filter unique categories by name to avoid duplicates
+          const uniqueCats = data.data.mainCategorySelectJoin.reduce((acc: any[], curr: any) => {
+            if (!acc.find(item => item.category_id === curr.category_id)) {
+              acc.push(curr);
+            }
+            return acc;
+          }, []);
+          setCategories(uniqueCats);
+        }
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  const mappedApiProducts: Product[] = rawApiProducts.map((item: any) => ({
+    id: String(item.material_id),
+    categoryName: item.category_id?.trim(), // Trim for better matching
+    name:
+      locale === "ru"
+        ? item.material_name_ru
+        : locale === "en"
+          ? item.material_name_en
+          : item.material_name_tm,
+    price: item.sale_price1 || 0,
+    image: item.image_path
+      ? `${process.env.NEXT_PUBLIC_ADMIN_URL}/public/products/apkCard/${encodeURIComponent(item.image_path)}`
+      : "/Logo.png", // Use Logo.png as placeholder if image is missing
+    description:
+      (locale === "ru"
+        ? item.main_desc_ru
+        : locale === "en"
+          ? item.main_desc_en
+          : item.main_desc_tm) || "-",
+    originalData: item // Keep original data for advanced filtering
+  }));
+
+  const allProducts = mappedApiProducts;
+  const wishlistItems = allProducts.filter((p) => wishlist.includes(p.id));
+
+  const filteredProducts = allProducts.filter((product) => {
     const matchesSearch = product.name
-      .toLowerCase()
+      ?.toLowerCase()
       .includes(searchQuery.toLowerCase());
-    return matchesSearch;
+    
+    const matchesCategory = activeCategory === "All Products" || 
+      product.categoryName === activeCategory;
+
+    return matchesSearch && matchesCategory;
   });
 
   const handleOpenDetails = (product: Product) => {
@@ -153,7 +154,7 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <StoreHeader 
+      <StoreHeader
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         showSearch={true}
@@ -171,11 +172,12 @@ export default function ProductsPage() {
           <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
             <div className="max-w-3xl">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-white mb-4">
-                {activeCategory}
+                {activeCategory === "All Products" 
+                  ? t("allProducts") 
+                  : (categories.find(c => c.category_name_tm === activeCategory)?.[`category_name_${locale}`] || activeCategory)}
               </h1>
               <p className="text-base sm:text-lg text-white font-light">
-                Discover our premium collection of enterprise-grade software and
-                hardware solutions designed to accelerate your business growth.
+                {t("description")}
               </p>
             </div>
           </div>
@@ -184,33 +186,53 @@ export default function ProductsPage() {
         <div className="bg-white border-b border-gray-200 sticky top-16 z-40">
           <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-2 overflow-x-auto py-4 scrollbar-hide">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`whitespace-nowrap px-5 py-2 text-sm font-medium transition-all ${
-                    activeCategory === cat
-                      ? "text-black border-b-2 border-black"
-                      : "text-gray-500 hover:text-black"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+              <button
+                onClick={() => setActiveCategory("All Products")}
+                className={`whitespace-nowrap px-5 py-2 text-sm font-medium transition-all ${
+                  activeCategory === "All Products"
+                    ? "text-[#0157A4] border-b-2 border-[#0157A4]"
+                    : "text-gray-500 hover:text-black"
+                }`}
+              >
+                {t("allProducts")}
+              </button>
+              {categories.map((cat) => {
+                const catName = locale === "ru" ? cat.category_name_ru : locale === "en" ? cat.category_name_en : cat.category_name_tm;
+                // Note: The product's category_id seems to contain the TM name of the category in the raw data
+                return (
+                  <button
+                    key={cat.category_id}
+                    onClick={() => setActiveCategory(cat.category_name_tm)}
+                    className={`whitespace-nowrap px-5 py-2 text-sm font-medium transition-all ${
+                      activeCategory === cat.category_name_tm
+                        ? "text-[#0157A4] border-b-2 border-[#0157A4]"
+                        : "text-gray-500 hover:text-black"
+                    }`}
+                  >
+                    {catName}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-          {filteredProducts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24">
-              <Search className="w-16 h-16 text-gray-300 mb-4" />
-              <h3 className="text-xl font-medium text-gray-900 mb-2">
-                No products found
-              </h3>
-              <p className="text-gray-500">
-                Try adjusting your search or filter
-              </p>
-            </div>
+         {isLoading ? (
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+    {Array.from({ length: 10 }).map((_, i) => (
+      <div key={i} className="text-sm border border-gray-200 rounded-lg bg-white flex flex-col overflow-hidden">
+        <div className="bg-gray-50 relative overflow-hidden">
+          <div className="h-64 w-full bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:600px_100%] animate-shimmer" />
+          <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:600px_100%] animate-shimmer" />
+        </div>
+        <div className="p-4 flex flex-col flex-grow gap-2">
+          <div className="h-5 w-4/5 rounded bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:600px_100%] animate-shimmer" />
+          <div className="h-4 w-full rounded bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:600px_100%] animate-shimmer" />
+          <div className="h-4 w-3/5 rounded bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:600px_100%] animate-shimmer" />
+        </div>
+      </div>
+    ))}
+  </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 ">
               {filteredProducts.map((product) => (
@@ -218,7 +240,7 @@ export default function ProductsPage() {
                   key={product.id}
                   className="text-sm border-[1px] rounded-lg border-gray-200 group bg-white flex flex-col overflow-hidden"
                 >
-                  <div className="relative group overflow-hidden bg-gray-50">
+                  <div className="relative group overflow-hidden">
                     {product?.image && (
                       <div
                         className="cursor-pointer"
@@ -229,8 +251,9 @@ export default function ProductsPage() {
                           alt={product.name}
                           width={500}
                           height={500}
-                          priority
-                          className="w-full h-64 object-contain transition-transform duration-500 group-hover:scale-105"
+                          unoptimized={true}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-64 object-contain"
                         />
                       </div>
                     )}
@@ -252,33 +275,22 @@ export default function ProductsPage() {
                     </button>
                   </div>
 
-                  <div className="p-4 flex flex-col flex-grow gap-3">
+                  <div className="p-4 flex flex-col flex-grow gap-2">
                     <h3 className="text-base font-semibold line-clamp-1 text-gray-900">
                       {product?.name}
                     </h3>
-
-                    <div className="flex-grow" />
-
-                    <p className="text-xl font-bold text-gray-900 whitespace-nowrap">
-                      ${product.price.toLocaleString()}
-                    </p>
-                    <div className="w-full mt-2">
-                      <AddToCart product={product} />
-                    </div>
+                    
+                    {product?.description && (
+                   <p className="text-gray-600 leading-relaxed">
+                    {product.description === "null" ? "-" : product.description}
+                  </p>
+                  )}
                   </div>
                 </div>
               ))}
             </div>
           )}
         </div>
-
-        {filteredProducts.length > 0 && (
-          <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex justify-center">
-            <button className="px-8 py-3 border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors text-sm font-medium">
-              Load More Products
-            </button>
-          </div>
-        )}
       </div>
 
       <ProductDetailModal
