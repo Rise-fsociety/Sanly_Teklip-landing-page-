@@ -10,7 +10,12 @@
     "backHome": "Back to home"
   },
   "Cart": {
-    "checkout": "Checkout",
+    "cartTitle": "Your Cart",
+    "emptyMessage": "Your cart is empty",
+    "startShopping": "Start Shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "checkoutNote": "Shipping and taxes calculated at checkout",
     "delivery": "Delivery",
     "items": "Items",
     "total": "Total",
@@ -92,6 +97,8 @@
   "ProductsPage": {
     "title": "Products",
     "description": "Discover our premium collection of enterprise-grade software and hardware solutions designed to accelerate your business growth.",
-    "allProducts": "All products"
+    "allProducts": "All products",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

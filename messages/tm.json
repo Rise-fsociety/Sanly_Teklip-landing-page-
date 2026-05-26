@@ -10,7 +10,12 @@
     "backHome": "Başa sahypa"
   },
   "Cart": {
+    "cartTitle": "Sebet",
+    "emptyMessage": "Sebet boş",
+    "startShopping": "Söwdany başlamag",
+    "subtotal": "Jemi",
     "checkout": "Sargyt etmek",
+    "checkoutNote": "Eltip bermek we salgylaryň bahasy goýberlerde hasaplanar",
     "delivery": "Eltip bermek",
     "items": "Harytlar",
     "total": "Jemi",
@@ -92,6 +97,8 @@
   "ProductsPage": {
     "title": "Harytlar",
     "description": "Telekeçiligiňizi ösdürmek üçin niýetlenen premium derejeli programma we enjamlaýyn çözgütlerimizi başdan geçiriň.",
-    "allProducts": "Ähli harytlar"
+    "allProducts": "Ähli harytlar",
+    "previous": "Öňki",
+    "next": "Indiki"
   }
 }

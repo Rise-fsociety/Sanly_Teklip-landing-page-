@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@react-three/fiber": "^9.6.0",
-    "@tawk.to/tawk-messenger-react": "^2.0.2",
     "@types/nprogress": "^0.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -5,10 +5,12 @@ import { X, ShoppingCart, Trash2, Plus, Minus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function CartDrawer() {
   const { cart, isOpen, setIsOpen, removeFromCart, updateQuantity, totalPrice, totalItems } = useCart();
+  const t = useTranslations("Cart");
+  
 
   return (
     <>
@@ -35,7 +37,7 @@ export function CartDrawer() {
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                     <ShoppingBag className="w-5 h-5" />
                   </div>
-                  <h2 className="text-xl font-bold uppercase tracking-wider">Your Cart</h2>
+                  <h2 className="text-xl font-bold uppercase tracking-wider">{t("cartTitle")}</h2>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -52,9 +54,9 @@ export function CartDrawer() {
                     <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center">
                       <ShoppingCart className="w-10 h-10 opacity-20" />
                     </div>
-                    <p className="text-lg">Your cart is empty</p>
+                    <p className="text-lg">{t("emptyMessage")}</p>
                     <Button variant="outline" onClick={() => setIsOpen(false)}>
-                      Start Shopping
+                      {t("startShopping")}
                     </Button>
                   </div>
                 ) : (
@@ -77,7 +79,7 @@ export function CartDrawer() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-lg truncate pr-8">{item.name}</h3>
-                        <p className="text-primary font-bold text-lg mb-2">${item.price}</p>
+                        <p className="text-primary font-bold text-lg mb-2">{item.price} TMT</p>
                         <div className="flex items-center gap-4">
                           <div className="flex items-center bg-background rounded-full border border-border p-1">
                             <button
@@ -109,20 +111,13 @@ export function CartDrawer() {
 
               {cart.length > 0 && (
                 <div className="p-6 border-t border-border bg-muted/20 backdrop-blur-md">
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-muted-foreground">Subtotal</span>
-                    <span className="text-2xl font-bold">${totalPrice}</span>
+                  <div className="flex gap-4 items-center">
+                    <span className="text-muted-foreground">{t("total")}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-bold">{totalPrice.toFixed(2)}</span>
+                      <span className="text-lg font-semibold">TMT</span>
+                    </div>
                   </div>
-                  <Link  
-                    onClick={() => setIsOpen(false)} 
-                    href="/shopping-cart" 
-                    className="w-full h-14 rounded-2xl text-lg font-black uppercase tracking-tighter shadow-xl shadow-blue-500/20 bg-[#3AB4FF] text-white flex items-center justify-center hover:bg-blue-600 transition-all active:scale-95"
-                  >
-                    Proceed to Checkout
-                  </Link>
-                  <p className="text-center text-xs text-muted-foreground mt-4">
-                    Shipping and taxes calculated at checkout
-                  </p>
                 </div>
               )}
             </motion.div>

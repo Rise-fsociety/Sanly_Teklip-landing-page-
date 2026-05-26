@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Home, Heart} from "lucide-react";
+import { Search, Home, Heart, ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/cart-context";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
@@ -112,8 +112,23 @@ export function StoreHeader({
               </button>
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label={t("cart")}
+                className="relative flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-full transition-colors"
               >
+                <ShoppingCart
+                  className={cn(
+                    "w-5 h-5",
+                    totalItems > 0 ? "text-brand-blue" : "text-gray-900",
+                  )}
+                />
+                <span className="hidden sm:inline text-sm font-semibold text-gray-900">
+                  {t("cart")}
+                </span>
+                {totalItems > 0 && (
+                  <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-red-500 px-1.5 text-[10px] font-black text-white">
+                    {totalItems}
+                  </span>
+                )}
               </button>
             </div>
           </div>

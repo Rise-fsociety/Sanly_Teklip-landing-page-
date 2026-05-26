@@ -148,6 +148,18 @@ export function Header() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsCartOpen(true)}
+              aria-label={t("cart")}
+              className="relative p-2 rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <ShoppingCart className="w-5 h-5 text-slate-700" />
+              {totalItems > 0 && (
+                <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-red-500 px-1.5 text-[10px] font-black text-white">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <MobileNav />
           </div>
         </nav>

@@ -3,27 +3,11 @@
 import Image from "next/image";
 import { Link, usePathname } from "@/i18n/navigation";
 import { motion, type Variants } from "framer-motion";
-import { Mail, Phone, MapPin} from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { FaTiktok, FaInstagram } from 'react-icons/fa';
-import { useTranslations } from "next-intl";
-
-const IconInstagram = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="w-7 h-7"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <circle cx="12" cy="12" r="4" />
-    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-  </svg>
-);
-
+import { useTranslations, useLocale } from "next-intl";
 import { useSmoothScroll } from "@/context/smooth-scroll-context";
+import { useEffect, useState } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -34,13 +18,84 @@ const fadeUp: Variants = {
   }),
 };
 
-  
+interface FooterLink {
+  label: string;
+  href: string;
+  icon?: any;
+}
 
 export function Footer() {
   const t = useTranslations("Footer");
+  const locale = useLocale();
   const currentYear = new Date().getFullYear();
   const { scrollTo } = useSmoothScroll();
   const pathname = usePathname();
+  
+  const [contactsList, setContactsList] = useState<FooterLink[]>([]);
+
+  useEffect(() => {
+    const fetchFooterContacts = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_ADMIN_URL}/api/v1/public/translation`);
+        const result = await response.json();
+
+        if (result.status === "success" && Array.isArray(result.data)) {
+          const phoneMatch = result.data.find((item: any) => item.key === "footer_contact_phone");
+          const emailMatch = result.data.find((item: any) => item.key === "footer_contact_email");
+          const addressMatch = result.data.find((item: any) => item.key === "footer_contact_address");
+
+          const dynamicContacts: FooterLink[] = [];
+
+          if (phoneMatch) {
+            const label = locale === "ru" ? phoneMatch.nameRu : locale === "en" ? phoneMatch.nameEn : phoneMatch.nameTm;
+            if (label) {
+              dynamicContacts.push({ label, href: `tel:${label.replace(/\s+/g, '')}`, icon: Phone });
+            }
+          }
+
+          if (emailMatch) {
+            const label = locale === "ru" ? emailMatch.nameRu : locale === "en" ? emailMatch.nameEn : emailMatch.nameTm;
+            if (label) {
+              dynamicContacts.push({ label, href: `mailto:${label}`, icon: Mail });
+            }
+          }
+
+          if (addressMatch) {
+            const label = locale === "ru" ? addressMatch.nameRu : locale === "en" ? addressMatch.nameEn : addressMatch.nameTm;
+            if (label) {
+              dynamicContacts.push({ label, href: "#", icon: MapPin });
+            }
+          }
+
+          if (dynamicContacts.length > 0) {
+            setContactsList(dynamicContacts);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch footer contacts via admin keys:", error);
+      }
+    };
+
+    fetchFooterContacts();
+  }, [locale]);
+
+  // СТАТИКА: Сервисы теперь зашиты жестко и переводятся локально
+  const staticServices = [
+    { label: locale === "ru" ? "Веб-разработка" : locale === "en" ? "Web Development" : "Web meýdançalary", href: "/#services" },
+    { label: "Android", href: "/#services" },
+    { label: "iOS", href: "/#services" },
+    { label: locale === "ru" ? "Бухгалтерские услуги" : locale === "en" ? "Accounting Services" : "Akhasap hyzmatlary", href: "/#services" },
+    { label: locale === "ru" ? "ИT-консалтинг" : locale === "en" ? "IT Consulting" : "IT Konsultasiýa", href: "/#services" },
+  ];
+
+  // Резервные контакты, пока в админке не созданы нужные ключи
+  const fallbackContacts = [
+    { label: "sanlyteklip@sanlyteklip.com.tm", href: "mailto:sanlyteklip@sanlyteklip.com.tm", icon: Mail },
+    { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
+    { label: t("address"), href: "#", icon: MapPin },
+  ];
+
+  const finalContacts = contactsList.length > 0 ? contactsList : fallbackContacts;
 
   const footerNav = [
     {
@@ -54,29 +109,11 @@ export function Footer() {
     },
     {
       heading: t("services"),
-      links: [
-        { label: t("web"), href: "" },
-        { label: t("android"), href: "" },
-        { label: t("ios"), href: "" },
-        { label: t("akhasap"), href: "" },
-        { label: t("consulting"), href: "" },
-      ],
+      links: staticServices,
     },
     {
       heading: t("contact"),
-      links: [
-        {
-          label: "sanlyteklip@sanlyteklip.com.tm",
-          href: "mailto:sanlyteklip@sanlyteklip.com.tm",
-          icon: Mail,
-        },
-        { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
-        {
-          label: t("address"),
-          href: "#",
-          icon: MapPin,
-        },
-      ],
+      links: finalContacts,
     },
   ];
 
@@ -113,27 +150,19 @@ export function Footer() {
             <p className="text-white/90 leading-relaxed text-base md:text-lg max-w-xs mb-8">
               {t("description")}
             </p>
-          <div className="flex items-center gap-4">
-          <Link
-              href="https://www.instagram.com/sanlyteklip/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >
-              <FaInstagram size={32} className="text-white" />
-            </Link>
-            <Link
-              href="https://www.tiktok.com/@sanly.teklip8"
-              target="_blank"
-              rel="noopener noreferrer"
-              >
-                <FaTiktok size={32} className="text-white"/>
-            </Link>
-          </div>
+            <div className="flex items-center gap-4">
+              <Link href="https://www.instagram.com/sanlyteklip/" target="_blank" rel="noopener noreferrer">
+                <FaInstagram size={32} className="text-white hover:opacity-80 transition-opacity" />
+              </Link>
+              <Link href="https://www.tiktok.com/@sanly.teklip8" target="_blank" rel="noopener noreferrer">
+                <FaTiktok size={32} className="text-white hover:opacity-80 transition-opacity"/>
+              </Link>
+            </div>
           </motion.div>
 
           {footerNav.map((col, colIdx) => (
             <motion.div
-              key={col.heading}
+              key={`footer-col-${col.heading}-${locale}-${colIdx}`}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -143,37 +172,26 @@ export function Footer() {
               <h3 className="text-sm md:text-base font-bold tracking-widest uppercase text-white mb-5">
                 {col.heading}
               </h3>
-              <ul className="space-y-3">
-                {col.links.map((link) => {
-                  const Icon = "icon" in link ? link.icon : null;
+              <ul key={`list-${col.heading}-${locale}`} className="space-y-3">
+                {col.links.map((link:any, linkIdx) => {
+                  const Icon = link.icon || null;
+                  const itemKey = `link-${col.heading}-${linkIdx}-${locale}`;
+
                   return (
-                    <li key={link.label}>
-                      {link.href ? (
-                        "featured" in link && link.featured ? (
-                          <a
-                            href={link.href}
-                            target="_blank"
-                          >
-                            {link.label}
-                          </a>
-                        ) : (
-                          <Link
-                            href={link.href}
-                            onClick={(e) => handleNavClick(e, link.href)}
-                            className="text-base md:text-lg text-white/80 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
-                          >
-                            {Icon && (
-                              <Icon className="w-3.5 h-3.5 text-white flex-shrink-0" />
-                            )}
-                            <span>{link.label}</span>
-                          </Link>
-                        )
+                    <li key={itemKey}>
+                      {link.href && link.href !== "#" ? (
+                        <Link
+                          href={link.href}
+                          onClick={(e) => handleNavClick(e, link.href)}
+                          className="text-base md:text-lg text-white/80 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                        >
+                          {Icon && <Icon className="w-3.5 h-3.5 text-white flex-shrink-0" />}
+                          <span className="truncate max-w-[220px] sm:max-w-none">{link.label}</span>
+                        </Link>
                       ) : (
                         <span className="text-base md:text-lg text-white/80 flex items-center gap-2">
-                          {Icon && (
-                            <Icon className="w-3.5 h-3.5 text-white flex-shrink-0" />
-                          )}
-                          {link.label}
+                          {Icon && <Icon className="w-3.5 h-3.5 text-white flex-shrink-0" />}
+                          <span>{link.label}</span>
                         </span>
                       )}
                     </li>

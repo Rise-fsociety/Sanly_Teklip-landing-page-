@@ -5,11 +5,17 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Product } from "@/context/cart-context";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL; 
+const ASSET_URL = process.env.NEXT_PUBLIC_ADMIN_URL; 
+
 interface SliderItem {
-  slider_id: number;
-  slider_image: string;
-  slider_section: number;
-  slider_blurhash?: string;
+  id: number;
+  image: string;
+  link: string;
+  order: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface PromoCarouselProps {
@@ -18,13 +24,13 @@ interface PromoCarouselProps {
 
 export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
   const [slides, setSlides] = useState<SliderItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const total = slides.length;
 
-  // On mobile show 1 slide, on desktop show 2
   const slidesPerView =
     typeof window !== "undefined" && window.innerWidth < 640 ? 1 : 2;
   const maxIndex = Math.max(0, total - slidesPerView);
@@ -32,13 +38,21 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const res = await fetch("/api/excell/carusel/select");
-        const data = await res.json();
-        if (data.status === "success" && data.data?.tbl_mg_slider) {
-          setSlides(data.data.tbl_mg_slider);
+        setLoading(true);
+        
+        const res = await fetch(`${API_URL}/public/banner`, {
+          method: "GET"
+        });
+
+        const json = await res.json();
+        
+        if (json.status === "success" && Array.isArray(json.data)) {
+          setSlides(json.data);
         }
       } catch (err) {
         console.error("Failed to fetch carousel:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchSlides();
@@ -54,15 +68,20 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
 
   useEffect(() => {
     resetTimer();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [resetTimer]);
 
   const goTo = useCallback(
     (index: number) => setCurrent(Math.min(Math.max(index, 0), maxIndex)),
-    [maxIndex]
+    [maxIndex],
   );
 
-  const handleNav = (dir: number) => { goTo(current + dir); resetTimer(); };
+  const handleNav = (dir: number) => {
+    goTo(current + dir);
+    resetTimer();
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -79,11 +98,27 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
     touchEndX.current = null;
   };
 
-  if (slides.length === 0) {
+  const getImageUrl = (path: string) => {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    
+    const baseUrl = ASSET_URL?.endsWith("/") ? ASSET_URL.slice(0, -1) : ASSET_URL;
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    
+    return `${baseUrl}${cleanPath}`; 
+  };
+
+  if (loading || slides.length === 0) {
     return (
       <div className="w-full rounded-xl flex gap-3">
-        <div className="flex-1 rounded-xl bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" style={{ aspectRatio: "21/7" }} />
-        <div className="flex-1 rounded-xl bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse hidden sm:block" style={{ aspectRatio: "21/7" }} />
+        <div
+          className="flex-1 rounded-xl bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse"
+          style={{ aspectRatio: "21/7" }}
+        />
+        <div
+          className="flex-1 rounded-xl bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse hidden sm:block"
+          style={{ aspectRatio: "21/7" }}
+        />
       </div>
     );
   }
@@ -97,14 +132,15 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
       role="region"
       aria-label="Promotional carousel"
     >
-      {/* Track — each slide is 50% width on desktop, 100% on mobile */}
       <div
         className="flex my-8 md:my-0 transition-transform duration-500 ease-in-out will-change-transform"
-        style={{ transform: `translateX(-${current * (100 / slidesPerView)}%)` }}
+        style={{
+          transform: `translateX(-${current * (100 / slidesPerView)}%)`,
+        }}
       >
         {slides.map((slide, index) => (
           <div
-            key={slide.slider_id}
+            key={slide.id}
             className="flex-shrink-0 px-1.5"
             style={{
               width: `${100 / slidesPerView}%`,
@@ -113,7 +149,7 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
           >
             <div className="relative w-full h-full rounded-xl overflow-hidden">
               <Image
-                src={`${process.env.NEXT_PUBLIC_ADMIN_URL}/public/carusel/caruselSharp/${slide.slider_image}`}
+                src={getImageUrl(slide.image)} 
                 alt={`Slide ${index + 1}`}
                 fill
                 priority={index === 0}
@@ -125,8 +161,7 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
           </div>
         ))}
       </div>
-
-      {/* Prev */}
+      
       <button
         onClick={() => handleNav(-1)}
         disabled={current === 0}
@@ -135,8 +170,6 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
       >
         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
       </button>
-
-      {/* Next */}
       <button
         onClick={() => handleNav(1)}
         disabled={current >= maxIndex}
@@ -146,15 +179,19 @@ export function PromoCarousel({ onProductClick }: PromoCarouselProps) {
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
       </button>
 
-      {/* Dots */}
       <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
         {Array.from({ length: maxIndex + 1 }).map((_, i) => (
           <button
             key={i}
             aria-label={`Go to slide ${i + 1}`}
-            onClick={() => { goTo(i); resetTimer(); }}
+            onClick={() => {
+              goTo(i);
+              resetTimer();
+            }}
             className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === current ? "bg-white w-5" : "bg-white/50 hover:bg-white/80 w-1.5"
+              i === current
+                ? "bg-white w-5"
+                : "bg-white/50 hover:bg-white/80 w-1.5"
             }`}
           />
         ))}

@@ -6,6 +6,8 @@ import { CartDrawer } from "@/components/cartDrawer";
 import { Footer } from "@/components/sections/footer";
 import { Toaster } from "react-hot-toast";
 import { Header } from "@/components/header";
+import { RocketToTop } from "@/components/RocketToTop";
+import AkymChatWidget from "@/components/AkymChat";
 
 export default async function LocaleLayout({
   children,
@@ -23,10 +25,13 @@ export default async function LocaleLayout({
       <CartProvider>
         <SmoothScrollProvider>
           <Toaster position="top-center" />
+          <AkymChatWidget/>
+          {/* <FloatingChat/> */}
           <Header />
           {children}
           <Footer />
           <CartDrawer />
+          <RocketToTop />
         </SmoothScrollProvider>
       </CartProvider>
     </NextIntlClientProvider>
