@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import {
   Terminal,
   AnimatedSpan,
@@ -14,16 +14,67 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function About() {
   const t = useTranslations('About');
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Text Reveal
+      gsap.fromTo(leftColRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: leftColRef.current,
+            start: "top 85%",
+          }
+        }
+      );
+
+      // Terminal Entry
+      gsap.fromTo(rightColRef.current,
+        { opacity: 0, scale: 0.9, y: 100 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: rightColRef.current,
+            start: "top 85%",
+          }
+        }
+      );
+      
+      // Parallax effect on the terminal itself during scroll
+      gsap.to(rightColRef.current, {
+        y: -100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="about" className="py-24 bg-transparent relative">
+    <section ref={sectionRef} id="about" className="py-24 bg-transparent relative">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="lg:sticky lg:top-24"
+          <div
+            ref={leftColRef}
+            className="lg:sticky lg:top-24 opacity-0"
           >
             <h2 className="text-6xl md:text-8xl font-black text-brand-blue mb-10 tracking-tighter leading-[0.9]">
               Sanly Teklip
@@ -41,14 +92,11 @@ export function About() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex justify-center"
+          <div
+            ref={rightColRef}
+            className="flex justify-center opacity-0"
           >
             <Terminal className="w-full h-auto min-h-fit max-w-2xl bg-white text-slate-900 border-2 border-slate-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] rounded-3xl p-2">
                <TypingAnimation>&gt; npm run dev</TypingAnimation>
@@ -112,7 +160,7 @@ export function About() {
                 {t('footer')}
               </TypingAnimation>
             </Terminal>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Antigravity from "../Antigravity";
 import TextType from "../textType/TextType";
@@ -82,7 +84,7 @@ export function Hero() {
           transition={{ delay: titleDelay, duration: 0.8, ease: "easeOut" }}
           className="text-2xl md:text-4xl text-slate-600 font-medium mb-12 tracking-wide uppercase"
         >
-         {titleText}
+          {titleText}
         </motion.p>
       </div>
 
