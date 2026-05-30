@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { 
   Globe, 
   Smartphone, 
@@ -11,6 +12,10 @@ import {
 } from "lucide-react";
 import { MagicCard } from "../ui/magic-card";
 import { useTranslations } from "next-intl";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const servicesKeys = [
   { key: "web", icon: Globe },

@@ -79,7 +79,6 @@ export function Footer() {
     fetchFooterContacts();
   }, [locale]);
 
-  // СТАТИКА: Сервисы теперь зашиты жестко и переводятся локально
   const staticServices = [
     { label: locale === "ru" ? "Веб-разработка" : locale === "en" ? "Web Development" : "Web meýdançalary", href: "/#services" },
     { label: "Android", href: "/#services" },
@@ -88,7 +87,6 @@ export function Footer() {
     { label: locale === "ru" ? "ИT-консалтинг" : locale === "en" ? "IT Consulting" : "IT Konsultasiýa", href: "/#services" },
   ];
 
-  // Резервные контакты, пока в админке не созданы нужные ключи
   const fallbackContacts = [
     { label: "sanlyteklip@sanlyteklip.com.tm", href: "mailto:sanlyteklip@sanlyteklip.com.tm", icon: Mail },
     { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
@@ -129,9 +127,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#0157A4] text-white overflow-hidden">
-      <div className="container mx-auto px-4 md:pt-20 pb-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+    /* ДОБАВЛЕНО: relative для позиционирования букв и увеличен нижний отступ (pb-24/md:pb-32), чтобы текст не перекрывал копирайт */
+    <footer className="relative bg-slate-950 text-white overflow-hidden pb-24 md:pb-32">
+      <div className="container mx-auto px-4 pt-16 md:pt-32 pb-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 lg:gap-12 mb-20">
           <motion.div
             className="lg:col-span-2"
             initial="hidden"
@@ -140,22 +139,22 @@ export function Footer() {
             custom={0}
             variants={fadeUp}
           >
-            <Image
+             <Image
               src="/TransparentLogo.webp"
               alt="Sanly Teklip"
               width={140}
               height={56}
-              className="mb-6 brightness-0 invert"
-            />
-            <p className="text-white/90 leading-relaxed text-base md:text-lg max-w-xs mb-8">
+              className="mb-8 brightness-0 invert"
+            /> 
+            <p className="text-slate-300 leading-relaxed text-base md:text-lg max-w-xs mb-10 font-light">
               {t("description")}
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link href="https://www.instagram.com/sanlyteklip/" target="_blank" rel="noopener noreferrer">
-                <FaInstagram size={32} className="text-white hover:opacity-80 transition-opacity" />
+                <FaInstagram size={32} className="text-slate-300 hover:text-blue-400 transition-colors duration-300" />
               </Link>
               <Link href="https://www.tiktok.com/@sanly.teklip8" target="_blank" rel="noopener noreferrer">
-                <FaTiktok size={32} className="text-white hover:opacity-80 transition-opacity"/>
+                <FaTiktok size={32} className="text-slate-300 hover:text-blue-400 transition-colors duration-300"/>
               </Link>
             </div>
           </motion.div>
@@ -169,10 +168,10 @@ export function Footer() {
               custom={colIdx + 1}
               variants={fadeUp}
             >
-              <h3 className="text-sm md:text-base font-bold tracking-widest uppercase text-white mb-5">
+              <h3 className="text-xs md:text-sm font-black tracking-widest uppercase text-white mb-6">
                 {col.heading}
               </h3>
-              <ul key={`list-${col.heading}-${locale}`} className="space-y-3">
+              <ul key={`list-${col.heading}-${locale}`} className="space-y-3 md:space-y-4">
                 {col.links.map((link:any, linkIdx) => {
                   const Icon = link.icon || null;
                   const itemKey = `link-${col.heading}-${linkIdx}-${locale}`;
@@ -183,14 +182,14 @@ export function Footer() {
                         <Link
                           href={link.href}
                           onClick={(e) => handleNavClick(e, link.href)}
-                          className="text-base md:text-lg text-white/80 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                          className="text-base md:text-lg text-slate-400 hover:text-blue-400 transition-colors duration-300 flex items-center gap-2 group font-light"
                         >
-                          {Icon && <Icon className="w-3.5 h-3.5 text-white flex-shrink-0" />}
+                          {Icon && <Icon className="w-4 h-4 text-slate-300 flex-shrink-0 group-hover:text-blue-400 transition-colors" />}
                           <span className="truncate max-w-[220px] sm:max-w-none">{link.label}</span>
                         </Link>
                       ) : (
-                        <span className="text-base md:text-lg text-white/80 flex items-center gap-2">
-                          {Icon && <Icon className="w-3.5 h-3.5 text-white flex-shrink-0" />}
+                        <span className="text-base md:text-lg text-slate-400 flex items-center gap-2 font-light">
+                          {Icon && <Icon className="w-4 h-4 text-slate-300 flex-shrink-0" />}
                           <span>{link.label}</span>
                         </span>
                       )}
@@ -201,10 +200,12 @@ export function Footer() {
             </motion.div>
           ))}
         </div>
-        <div className="my-6 md:my-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-base md:text-lg text-white/80">
-          <p>© {currentYear} Sanly Teklip. {t("rights")}</p>
-        </div>
+      </div>
+
+      <div className="absolute bottom-20 md:bottom-10 left-0 right-0 leading-none pointer-events-none translate-y-[35%] md:translate-y-[30%] select-none z-0">
+        <h1 className="text-[13vw] font-black tracking-tighter text-center uppercase text-transparent bg-clip-text bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 opacity-999">
+          Sanly Teklip
+        </h1>
       </div>
     </footer>
   );

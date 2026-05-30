@@ -7,6 +7,10 @@ import {
   TypingAnimation,
 } from "@/components/ui/terminal";
 import { useTranslations } from "next-intl";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function About() {
   const t = useTranslations('About');
