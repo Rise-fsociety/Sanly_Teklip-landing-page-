@@ -160,11 +160,10 @@ export function ProductDetailModal({
                     <button
                       key={idx}
                       onClick={() => emblaApi && emblaApi.scrollTo(idx)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        idx === selectedIndex
+                      className={`h-1.5 rounded-full transition-all duration-300 ${idx === selectedIndex
                           ? "bg-[#0157A4] w-5 shadow-sm"
                           : "bg-gray-300 w-1.5 hover:bg-gray-400"
-                      }`}
+                        }`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
                   ))}
@@ -182,8 +181,8 @@ export function ProductDetailModal({
                 <div className="h-[1px] w-full bg-gray-100" />
                 <div className="space-y-4">
                   {product.description &&
-                  product.description !== "null" &&
-                  product.description !== "none" ? (
+                    product.description !== "null" &&
+                    product.description !== "none" ? (
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed whitespace-pre-line break-words">
                       {product.description}
                     </p>

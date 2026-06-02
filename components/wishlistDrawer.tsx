@@ -64,7 +64,7 @@ export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct
                       {t("emptyDesc")}
                     </p>
                   </div>
-                  <Button 
+                  <Button
                     onClick={onClose}
                     className="bg-gray-900 text-white hover:bg-black rounded-xl"
                   >
@@ -75,7 +75,7 @@ export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct
                 <div className="space-y-6">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-4 group">
-                      <div 
+                      <div
                         className="relative w-24 h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer"
                         onClick={() => onViewProduct(item)}
                       >
@@ -88,17 +88,17 @@ export function WishlistDrawer({ isOpen, onClose, items, onRemove, onViewProduct
                       </div>
                       <div className="flex-1 flex flex-col justify-between py-1">
                         <div>
-                          <h4 
+                          <h4
                             className="font-bold text-gray-900 group-hover:text-brand-blue transition-colors cursor-pointer"
                             onClick={() => onViewProduct(item)}
                           >
                             {item.name}
                           </h4>
-                           {item?.description && (
-                   <p className="text-sm text-gray-500 line-clamp-1">
-                    {item.description === "null" ? "-" : item.description}
-                  </p>
-                  )}
+                          {item?.description && (
+                            <p className="text-sm text-gray-500 line-clamp-1">
+                              {item.description === "null" ? "-" : item.description}
+                            </p>
+                          )}
                         </div>
                         <div className="flex items-center justify-between">
                           <button

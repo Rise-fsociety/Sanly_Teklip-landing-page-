@@ -21,6 +21,35 @@ interface ProductsClientProps {
   initialTotalPages: number;
 }
 
+const ProductImage = ({ product, onClick }: { product: any, onClick: () => void }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <div
+      className="cursor-pointer relative w-full h-32 sm:h-48 md:h-64"
+      onClick={onClick}
+    >
+      {isLoading && (
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:600px_100%] animate-shimmer" />
+      )}
+      <Image
+        src={product.image}
+        alt={product.name}
+        width={500}
+        height={500}
+        unoptimized={true}
+        referrerPolicy="no-referrer"
+        onLoad={() => setIsLoading(false)}
+        onError={() => setIsLoading(false)}
+        className={cn(
+          "w-full h-full object-contain p-2 transition-opacity duration-300",
+          isLoading ? "opacity-0" : "opacity-100"
+        )}
+      />
+    </div>
+  );
+};
+
 export function ProductsClient({ initialProducts, initialCategories, initialTotalPages }: ProductsClientProps) {
   const [activeCategory, setActiveCategory] = useState("All Products");
   const [searchQuery, setSearchQuery] = useState("");
@@ -303,20 +332,10 @@ export function ProductsClient({ initialProducts, initialCategories, initialTota
                 >
                   <div className="relative group overflow-hidden">
                     {product?.image && (
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleOpenDetails(product)}
-                      >
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          width={500}
-                          height={500}
-                          unoptimized={true}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-32 sm:h-48 md:h-64 object-contain p-2"
-                        />
-                      </div>
+                      <ProductImage 
+                        product={product} 
+                        onClick={() => handleOpenDetails(product)} 
+                      />
                     )}
                     <button
                       onClick={(e) => {
