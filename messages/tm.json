@@ -97,8 +97,13 @@
   "ProductsPage": {
     "title": "Harytlar",
     "description": "Telekeçiligiňizi ösdürmek üçin niýetlenen premium derejeli programma we enjamlaýyn çözgütlerimizi başdan geçiriň.",
-    "allProducts": "Ähli harytlar",
-    "previous": "Öňki",
-    "next": "Indiki"
+    "allProducts": "Ähli harytlar"
+  },
+  "Metadata": {
+    "title": "Sanly Teklip | Professional veb-saýtlaryň we IT çözgütleriň işlenip düzülmegi",
+    "description": "Biz biznes üçin ýokary tehnologiýaly veb-saytlary, dolandyryş panellerini (dashboard) we toplumlaýyn IT çözgütlerini döredýäris. Döwrebap stecomponentler: React, Next.js, UI/UX dizaýn.",
+    "keywords": "veb-saytaryň işlenip düzülmegi, IT kompaniýa, Sanly Teklip, saýt sargyt etmek, Next.js programmist, biznesi awtomatlaşdyrmak",
+    "ogTitle": "Sanly Teklip — Biznesiňiz üçin sanly çözgütler",
+    "ogDescription": "Islendik çylşyrymlylykdaky döwrebap, çalt işleýän saýtlaryň we interfeýsleriň döredilmegi."
   }
 }
