@@ -1,11 +1,11 @@
 import createMiddleware from 'next-intl/middleware';
  
 export default createMiddleware({
-  locales: ['tm', 'ru', 'en'],
+  locales: ['tk', 'ru', 'en'],
  
-  defaultLocale: 'tm'
+  defaultLocale: 'tk'
 });
  
 export const config = {
-  matcher: ['/', '/(tm|ru|en)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: ['/', '/(tk|ru|en)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
 };

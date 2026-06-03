@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="tm"
+      lang="tk"
       className={`${geistSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

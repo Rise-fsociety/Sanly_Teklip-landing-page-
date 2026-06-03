@@ -25,8 +25,7 @@ export default async function LocaleLayout({
       <CartProvider>
         <SmoothScrollProvider>
           <Toaster position="top-center" />
-          <AkymChatWidget/>
-          {/* <FloatingChat/> */}
+          <AkymChatWidget />
           <Header />
           {children}
           <Footer />

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Heart, ShoppingBag, Trash2 } from "lucide-react";
+import { X, Heart, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { Product } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";

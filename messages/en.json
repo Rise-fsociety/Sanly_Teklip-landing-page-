@@ -100,12 +100,5 @@
     "allProducts": "All products",
     "previous": "Previous",
     "next": "Next"
-  },
-  "Metadata": {
-    "title": "Sanly Teklip | Professional Web & IT Solutions Development",
-    "description": "We create high-tech websites, dashboards, and comprehensive IT solutions for business. Modern stack: React, Next.js, UI/UX design.",
-    "keywords": "web development, IT company, Sanly Teklip, order website, Next.js developer, business automation",
-    "ogTitle": "Sanly Teklip — Digital Solutions for Your Business",
-    "ogDescription": "Development of modern, high-performance websites and interfaces of any complexity."
   }
 }

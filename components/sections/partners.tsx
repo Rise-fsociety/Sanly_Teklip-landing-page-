@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import LogoLoop from "../logoLoop/LogoLoop";
 import { useTranslations } from "next-intl";
+import { Skiper39 } from "../ui/skiper-ui/skiper39";
 
 const partnerLogos = [
   { src: "/Akhasap.png",     alt: "Akhasap",      title: "Akhasap"      },
@@ -45,6 +46,7 @@ export function Partners() {
         fadeOutColor="#ffffff"
         ariaLabel="Hyzmatdaşlar"
       />
+      <Skiper39/>
     </section>
   );
 }

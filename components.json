@@ -25,6 +25,7 @@
     "@efferd": "https://efferd.com/r/{name}.json",
     "@magicui": "https://magicui.design/r/{name}",
     "@react-bits": "https://reactbits.dev/r/{name}.json",
-    "@motion-primitives": "https://motion-primitives.com/c/{name}.json"
+    "@motion-primitives": "https://motion-primitives.com/c/{name}.json",
+    "@skiper-ui": "https://skiper-ui.com/registry/{name}.json"
   }
 }
