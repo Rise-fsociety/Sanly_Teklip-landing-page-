@@ -1,3 +1,4 @@
+import NativeResponsiveMap from "@/components/interactiveImg/InteractiveShelf";
 import { ProductsClient } from "./ProductsClient";
 import { getTranslations } from "next-intl/server";
 
@@ -17,8 +18,6 @@ export default async function ProductsPage({
 }) {
   const resolvedSearchParams = await searchParams;
   const page = resolvedSearchParams.page ? parseInt(resolvedSearchParams.page, 10) : 1;
-  const search = resolvedSearchParams.search || "";
-  const categoryId = resolvedSearchParams.categoryId || "All Products";
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -73,10 +72,13 @@ export default async function ProductsPage({
   }
 
   return (
+    <>
+    <NativeResponsiveMap />
     <ProductsClient
       initialProducts={rawApiProducts}
       initialCategories={categories}
       initialTotalPages={totalPages}
-    />
+      />
+      </>
   );
 }

@@ -65,10 +65,10 @@ export function StoreHeader({
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => handleLanguageChange("tm")}
+                  onClick={() => handleLanguageChange("tk")}
                   className={cn(
                     "text-xs font-black transition-all hover:scale-110",
-                    locale === "tm" ? "text-brand-blue" : "text-slate-400",
+                    locale === "tk" ? "text-brand-blue" : "text-slate-400",
                   )}
                 >
                   TM
