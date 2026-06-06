@@ -4,32 +4,44 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ── Set these to your productShelf.png natural dimensions ──────────────────────
+// ── Widescreen aspect ratio dimensions based on your production image canvas ──
 const IMAGE_W = 4000;
-const IMAGE_H = 6000;
+const IMAGE_H = 1815; 
 
 const products = [
   {
     id: "gok-kagyz",
     name: "Gök Kağyz",
     price: "$12.99",
-    x1: 1627, y1: 4914, x2: 2399, y2: 5663,
+    x1: 610, y1: 1540, x2: 1220, y2: 1780,
+  },
+  {
+    id: "ak-kagyz",
+    name: "Ak kagyz",
+    price: "$12.99",
+    x1: 1110, y1: 1540, x2: 1910, y2: 1780,
+  },
+  {
+    id: "ak-kagyz-center",
+    name: "Ak kagyz center",
+    price: "$12.99",
+    x1: 1400, y1: 1550, x2: 2320, y2: 1780,
+  },
+  {
+    id: "ak-kagyz-sary-center",
+    name: "Ak kagyz sary center",
+    price: "$12.99",
+    x1: 1600, y1: 1550, x2: 2710, y2: 1780,
   },
   {
     id: "terezi",
     name: "Terezi",
     price: "$8.49",
-    x1: 1631, y1: 4142, x2: 2441, y2: 4638,
-  },
-  {
-    id: "printer",
-    name: "Printer",
-    price: "$249.00",
-    x1: 2865, y1: 3824, x2: 3268, y2: 4608,
+    x1: 2000, y1: 1540, x2: 3200, y2: 1780,
   },
 ];
 
-// ─── Tooltip card — pure white, price above name, no image ───────────────────
+// ─── Tooltip card — Premium white modal layered carefully on top ──────────────
 function Tooltip({ name, price }: { name: string; price: string }) {
   return (
     <motion.div
@@ -40,12 +52,12 @@ function Tooltip({ name, price }: { name: string; price: string }) {
       className="absolute left-[calc(100%+14px)] top-1/2 -translate-y-1/2 z-50 pointer-events-none"
       style={{ minWidth: 160 }}
     >
+      {/* Arrow pointing left toward the dot */}
       <div
         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[7px] w-3.5 h-3.5 rotate-45 rounded-sm"
         style={{ background: "#fff", boxShadow: "-2px 2px 6px rgba(0,0,0,0.08)" }}
       />
 
-      {/* White card */}
       <div
         className="relative rounded-2xl px-5 py-4 flex flex-col gap-0.5"
         style={{
@@ -60,26 +72,25 @@ function Tooltip({ name, price }: { name: string; price: string }) {
   );
 }
 
-// ─── Hotspot — dot centered on product, tooltip to its right ─────────────────
 function Hotspot({ product }: { product: typeof products[0] }) {
   const [hovered, setHovered] = useState(false);
 
-  // Center point of the product zone in %
+  // Exact math to track hotspots fluidly when image stretches to full width
   const cx = ((product.x1 + product.x2) / 2 / IMAGE_W) * 100;
   const cy = ((product.y1 + product.y2) / 2 / IMAGE_H) * 100;
 
   return (
     <div
-      className="absolute z-10"
+      className="absolute"
       style={{
         left: `${cx}%`,
         top: `${cy}%`,
         transform: "translate(-50%, -50%)",
+        zIndex: hovered ? 30 : 10,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Outer pulse ring */}
       <motion.div
         animate={
           hovered
@@ -95,7 +106,6 @@ function Hotspot({ product }: { product: typeof products[0] }) {
         style={{ background: "rgba(255,255,255,0.6)" }}
       />
 
-      {/* Dot button */}
       <motion.div
         animate={{ scale: hovered ? 1.15 : 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 22 }}
@@ -107,14 +117,12 @@ function Hotspot({ product }: { product: typeof products[0] }) {
             : "0 0 0 2px rgba(255,255,255,0.4), 0 2px 12px rgba(0,0,0,0.25)",
         }}
       >
-        {/* Inner filled circle */}
         <div
           className="w-3 h-3 rounded-full"
           style={{ background: hovered ? "#111" : "#888" }}
         />
       </motion.div>
 
-      {/* Tooltip */}
       <AnimatePresence>
         {hovered && <Tooltip key="tip" name={product.name} price={product.price} />}
       </AnimatePresence>
@@ -122,21 +130,25 @@ function Hotspot({ product }: { product: typeof products[0] }) {
   );
 }
 
-// ─── Main export ──────────────────────────────────────────────────────────────
 export default function ProductShelf() {
   return (
-    <div className="relative ">
-      <Image
-        src="/leftShelf.png"
-        alt="Product Shelf"
-        width={IMAGE_W}
-        height={IMAGE_H}
-        className="w-full  block"
-        priority
-      />
-      {products.map((p) => (
-        <Hotspot key={p.id} product={p} />
-      ))}
+    <div className="w-full max-w-5/6 h-full bg-white px-0 py-4 select-none">
+      <div className="relative w-full aspect-[4000/1815] overflow-visible bg-white">
+        <Image
+          src="/productShelf.png"
+          alt="Full Width Product Shelf"
+          width={IMAGE_W}
+          height={IMAGE_H}
+          className="w-full h-auto block object-cover"
+          priority
+        />
+        
+        {/* Hotspots layer overlays perfectly over the full width background container layout */}
+        {products.map((p) => (
+          <Hotspot key={p.id} product={p} />
+        ))}
+      </div>
+
     </div>
   );
 }
