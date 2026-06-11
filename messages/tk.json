@@ -2,6 +2,7 @@
   "Header": {
     "about": "Biz Hakda",
     "services": "Hyzmatlar",
+    "work": "Işimiz",
     "tools": "Tehnologiýalar",
     "products": "Harytlar",
     "cart": "Sebet",
@@ -28,7 +29,21 @@
     "add": "Sebede goş",
     "added": "Haryt goşuldy"
   },
-  "Hero": {
+  "ProductsPage": {
+    "title": "Harytlar",
+    "description": "Biziň korporatiw programmalaşdyrma we donandy çözgütleriň premium kollekciyasyny açyň we işiňizi tez artyryň.",
+    "allProducts": "Ähli harytlar",
+    "previous": "Öňki",
+    "next": "Keyinki",
+    "seeMore": "Köpini gör"
+  },
+  "Integrations": {
+    "title": "Integrasiýalar",
+    "subtitle": "Biziň işiňize güýçli çözgütler bermek üçin iň gowy platformalar we gurallary ulanypdyr."
+  },  "Work": {
+    "title": "Işimiz",
+    "subtitle": "Müşderilerimiz üçin döredilen taslamalar."
+  },  "Hero": {
     "title": "Gelejegiň ýoly",
     "type1": "Sanly çözgütler.",
     "type2": "Ygtybarly hyzmatlar.",
@@ -93,11 +108,6 @@
   "Tools": {
     "title": "Tehnologiýalarymyz",
     "subtitle": "Biz döwrebap Frontend we Backend tehnologiýalaryny ulanmak bilen iň oňat çözgütleri döredýäris."
-  },
-  "ProductsPage": {
-    "title": "Harytlar",
-    "description": "Telekeçiligiňizi ösdürmek üçin niýetlenen premium derejeli programma we enjamlaýyn çözgütlerimizi başdan geçiriň.",
-    "allProducts": "Ähli harytlar"
   },
   "Metadata": {
     " title": "Sanly Teklip | Professional veb-saytaryň we IT çözgütleriň işlenip düzülmegi",

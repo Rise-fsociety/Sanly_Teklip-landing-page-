@@ -22,6 +22,10 @@ export const navLinks = [
     href: "/#services",
   },
   {
+    key: "work",
+    href: "/#work",
+  },
+  {
     key: "tools",
     href: "/#tools",
   },
@@ -103,7 +107,7 @@ export function Header() {
                     key={link.key}
                     variant="ghost"
                     className={cn(
-                      "text-base font-semibold hover:text-brand-blue transition-colors",
+                      "text-base 2xl:text-lg font-semibold hover:text-brand-blue transition-colors",
                       isActive ? "text-brand-blue" : "text-slate-600",
                     )}
                   >

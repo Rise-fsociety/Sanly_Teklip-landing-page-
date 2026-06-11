@@ -66,10 +66,10 @@ export function Services() {
                   <div className="mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     <service.icon className="w-8 h-8 text-slate-700 transition-colors duration-300 group-hover:text-white" />
                   </div>
-                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-4 text-slate-900">
+                  <h3 className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold mb-4 text-slate-900">
                     {t(service.key)}
                   </h3>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed text-center font-medium">
+                  <p className="text-sm md:text-base 2xl:text-xl text-slate-600   leading-relaxed text-center font-medium">
                     {t(`${service.key}_desc`)}
                   </p>
                 </div>

@@ -2,6 +2,7 @@
   "Header": {
     "about": "About Us",
     "services": "Services",
+    "work": "Our Work",
     "tools": "Technologies",
     "products": "Products",
     "cart": "Cart",
@@ -99,6 +100,15 @@
     "description": "Discover our premium collection of enterprise-grade software and hardware solutions designed to accelerate your business growth.",
     "allProducts": "All products",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "seeMore": "See More"
+  },
+  "Integrations": {
+    "title": "Integrations",
+    "subtitle": "We work with the best platforms and tools to deliver powerful solutions for your business."
+  },
+  "Work": {
+    "title": "Our Work",
+    "subtitle": "Discover the projects and integrations we've built for our clients."
   }
 }

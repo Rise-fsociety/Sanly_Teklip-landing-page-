@@ -20,7 +20,6 @@ export function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Text Reveal
       gsap.fromTo(leftColRef.current,
         { opacity: 0, y: 50 },
         {
@@ -35,7 +34,6 @@ export function About() {
         }
       );
 
-      // Terminal Entry
       gsap.fromTo(rightColRef.current,
         { opacity: 0, scale: 0.9, y: 100 },
         {
@@ -51,7 +49,6 @@ export function About() {
         }
       );
       
-      // Parallax effect on the terminal itself during scroll
       gsap.to(rightColRef.current, {
         y: -100,
         ease: "none",
@@ -76,7 +73,7 @@ export function About() {
             ref={leftColRef}
             className="lg:sticky lg:top-24 opacity-0"
           >
-            <h2 className="text-6xl md:text-8xl font-black text-brand-blue mb-10 tracking-tighter leading-[0.9]">
+            <h2 className="text-6xl  md:text-8xl font-black text-brand-blue mb-10 tracking-tighter leading-[0.9]">
               Sanly Teklip
             </h2>
             <div className="space-y-8">

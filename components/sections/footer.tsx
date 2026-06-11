@@ -127,7 +127,6 @@ export function Footer() {
   };
 
   return (
-    /* ДОБАВЛЕНО: relative для позиционирования букв и увеличен нижний отступ (pb-24/md:pb-32), чтобы текст не перекрывал копирайт */
     <footer className="relative bg-slate-950 text-white overflow-hidden pb-24 md:pb-32">
       <div className="container mx-auto px-4 pt-16 md:pt-32 pb-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 lg:gap-12 mb-20">
@@ -146,7 +145,8 @@ export function Footer() {
               height={56}
               className="mb-8 brightness-0 invert"
             /> 
-            <p className="text-slate-300 leading-relaxed text-base md:text-lg max-w-xs mb-10 font-light">
+            {/* Scaled up description font layout: text-lg / md:text-xl / 2xl:text-2xl */}
+            <p className="text-slate-300 leading-relaxed text-lg md:text-xl 2xl:text-2xl max-w-sm mb-10 font-light">
               {t("description")}
             </p>
             <div className="flex items-center gap-6">
@@ -168,7 +168,8 @@ export function Footer() {
               custom={colIdx + 1}
               variants={fadeUp}
             >
-              <h3 className="text-xs md:text-sm font-black tracking-widest uppercase text-white mb-6">
+              {/* Scaled up section header text typography */}
+              <h3 className="text-sm md:text-base font-black tracking-widest uppercase text-white mb-6">
                 {col.heading}
               </h3>
               <ul key={`list-${col.heading}-${locale}`} className="space-y-3 md:space-y-4">
@@ -179,17 +180,19 @@ export function Footer() {
                   return (
                     <li key={itemKey}>
                       {link.href && link.href !== "#" ? (
+                        /* Scaled up interactive nav targets: text-lg / md:text-xl / 2xl:text-2xl */
                         <Link
                           href={link.href}
                           onClick={(e) => handleNavClick(e, link.href)}
-                          className="text-base md:text-lg text-slate-400 hover:text-blue-400 transition-colors duration-300 flex items-center gap-2 group font-light"
+                          className="text-lg md:text-xl 2xl:text-2xl text-slate-400 hover:text-blue-400 transition-colors duration-300 flex items-center gap-2 group font-light"
                         >
-                          {Icon && <Icon className="w-4 h-4 text-slate-300 flex-shrink-0 group-hover:text-blue-400 transition-colors" />}
+                          {Icon && <Icon className="w-5 h-5 text-slate-300 flex-shrink-0 group-hover:text-blue-400 transition-colors" />}
                           <span className="truncate max-w-[220px] sm:max-w-none">{link.label}</span>
                         </Link>
                       ) : (
-                        <span className="text-base md:text-lg text-slate-400 flex items-center gap-2 font-light">
-                          {Icon && <Icon className="w-4 h-4 text-slate-300 flex-shrink-0" />}
+                        /* Scaled up regular spans text size properties */
+                        <span className="text-lg md:text-xl 2xl:text-2xl text-slate-400 flex items-center gap-2 font-light">
+                          {Icon && <Icon className="w-5 h-5 text-slate-300 flex-shrink-0" />}
                           <span>{link.label}</span>
                         </span>
                       )}

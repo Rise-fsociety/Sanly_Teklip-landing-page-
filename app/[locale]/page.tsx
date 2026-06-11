@@ -4,6 +4,8 @@ import { Services } from "@/components/sections/services";
 import { Partners } from "@/components/sections/partners";
 import { Tools } from "@/components/sections/tools";
 import { About } from "@/components/sections/about";
+import { Work } from "@/components/sections/work";
+import { FeaturedProducts } from "@/components/sections/featuredProducts";
 import { SmoothScrollInit } from "@/components/smooth-scroll-init";
 
 const baseUrl = "https://sanlyteklip.com.tm";
@@ -66,6 +68,8 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
+      <Work />
+      <FeaturedProducts />
       <Partners />
       <Tools />
     </main>
