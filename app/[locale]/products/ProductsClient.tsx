@@ -14,6 +14,7 @@ import { PromoCarousel } from "@/components/products/PromoCarousel";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { StoreHeader } from "@/components/store-header";
+import TourPage from "@/components/tour/tourPage";
 
 interface ProductsClientProps {
   initialProducts: any[];
@@ -242,6 +243,7 @@ export function ProductsClient({ initialProducts, initialCategories, initialTota
         <div className="bg-gray-50 py-8 md:py-12">
           <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
             <PromoCarousel />
+          <TourPage />
           </div>
         </div>
 
@@ -252,7 +254,7 @@ export function ProductsClient({ initialProducts, initialCategories, initialTota
                 {activeCategory === "All Products"
                   ? t("allProducts")
                   : categories.find((c) => String(c.id) === activeCategory)?.[
-                  `name${locale.charAt(0).toUpperCase() + locale.slice(1)}`
+                  locale === "tk" ? "nameTm" : locale === "ru" ? "nameRu" : "nameEn"
                   ] || activeCategory}
               </h1>
               <p className="text-base sm:text-lg text-white font-light">

@@ -25,6 +25,9 @@
     "placeholderAddress": "Salgyňyz",
     "placeholderNotes": "Bellikler"
   },
+  "More": {
+    "seeMore": "Hemmesini gör"
+  },
   "Products": {
     "add": "Sebede goş",
     "added": "Haryt goşuldy"
@@ -35,7 +38,7 @@
     "allProducts": "Ähli harytlar",
     "previous": "Öňki",
     "next": "Keyinki",
-    "seeMore": "Köpini gör"
+    "seeMore": "Hemmesini gör"
   },
   "Integrations": {
     "title": "Integrasiýalar",
@@ -43,6 +46,11 @@
   },  "Work": {
     "title": "Işimiz",
     "subtitle": "Müşderilerimiz üçin döredilen taslamalar."
+  },
+  "Tour": {
+    "clickToInteract": "Tura basyň",
+    "fullScreen": "Doly Ekran",
+    "exitFullscreen": "Doly Ekrandan çyk"
   },  "Hero": {
     "title": "Gelejegiň ýoly",
     "type1": "Sanly çözgütler.",

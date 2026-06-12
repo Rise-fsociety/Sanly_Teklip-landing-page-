@@ -95,6 +95,9 @@
     "title": "Our Technologies",
     "subtitle": "We create the best solutions by using modern Frontend and Backend technologies."
   },
+  "More": {
+    "seeMore": "See More"
+  },
   "ProductsPage": {
     "title": "Products",
     "description": "Discover our premium collection of enterprise-grade software and hardware solutions designed to accelerate your business growth.",
@@ -110,5 +113,10 @@
   "Work": {
     "title": "Our Work",
     "subtitle": "Discover the projects and integrations we've built for our clients."
+  },
+  "Tour": {
+    "clickToInteract": "Click to interact with Tour",
+    "fullScreen": "Full Screen",
+    "exitFullscreen": "Exit Fullscreen"
   }
 }

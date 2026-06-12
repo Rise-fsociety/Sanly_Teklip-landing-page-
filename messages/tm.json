@@ -99,6 +99,11 @@
     "description": "Telekeçiligiňizi ösdürmek üçin niýetlenen premium derejeli programma we enjamlaýyn çözgütlerimizi başdan geçiriň.",
     "allProducts": "Ähli harytlar"
   },
+  "Tour": {
+    "clickToInteract": "Tur bilen ýüzleşmek üçin tıklaň",
+    "fullScreen": "Doly Ekran",
+    "exitFullscreen": "Doly Ekrandan çyk"
+  },
   "Metadata": {
     " title": "Sanly Teklip | Professional veb-saytaryň we IT çözgütleriň işlenip düzülmegi",
     "description": "Biz biznes üçin ýokary tehnologiýaly veb-saytlary, dolandyryş panellerini (dashboard) we toplumlaýyn IT çözgütlerini döredýäris. Döwrebap stecomponentler: React, Next.js, UI/UX dizaýn.",

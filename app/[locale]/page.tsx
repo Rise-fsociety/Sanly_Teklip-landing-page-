@@ -11,7 +11,7 @@ import { SmoothScrollInit } from "@/components/smooth-scroll-init";
 const baseUrl = "https://sanlyteklip.com.tm";
 
 export const metadata: Metadata = {
-  title: "Sanly Teklip | Professional web-saýtlaryň we IT çözgütleriň işlenip düzülmegi",
+  title: "Sanly Teklip | Web-saýtlaryň, programmalaryň we IT çözgütleriň işlenip düzülmegi",
   description: "Biz biznes üçin ýokary tehnologiýaly web-saýtlary, dolandyryş panellerini (dashboard) we toplumlaýyn IT çözgütlerini döredýäris. Döwrebap stek: React, Next.js, UI/UX dizaýn.",
   keywords: "Web-saýtlaryň işlenip düzülmegi, IT kompaniýa, Sanly Teklip, saýt sargyt etmek, Next.js programmist, biznesi awtomatlaşdyrmak",
 

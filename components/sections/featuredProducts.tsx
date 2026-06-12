@@ -5,21 +5,10 @@ import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Heart } from "lucide-react";
-import { useCart } from "@/context/cart-context";
+import { type Product } from "@/context/cart-context";
 import { AddToCart } from "@/components/products/AddToCart";
 import { ProductDetailModal } from "@/components/productDetailModal";
 import { cn } from "@/lib/utils";
-
-interface Product {
-  id: string;
-  categoryName: string;
-  name: string;
-  price: number;
-  discountPrice?: number;
-  image: string;
-  description?: string;
-  originalData?: any;
-}
 
 const ProductImage = ({ product, onClick }: { product: any, onClick: () => void }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +45,7 @@ export function FeaturedProducts() {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const locale = useLocale();
-  const t = useTranslations("ProductsPage");
+  const t = useTranslations("More");
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const ASSET_URL = process.env.NEXT_PUBLIC_ADMIN_URL;
 

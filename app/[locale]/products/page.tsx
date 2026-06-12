@@ -1,4 +1,3 @@
-import NativeResponsiveMap from "@/components/interactiveImg/InteractiveShelf";
 import { ProductsClient } from "./ProductsClient";
 import { getTranslations } from "next-intl/server";
 
@@ -72,13 +71,10 @@ export default async function ProductsPage({
   }
 
   return (
-    <>
-    <NativeResponsiveMap />
     <ProductsClient
       initialProducts={rawApiProducts}
       initialCategories={categories}
       initialTotalPages={totalPages}
       />
-      </>
   );
 }
