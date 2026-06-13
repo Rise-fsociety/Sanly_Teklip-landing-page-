@@ -13,51 +13,51 @@ type Integration = {
 
 const data: Integration[] = [
     {
-        src: "https://storage.efferd.com/logo/vercel.svg",
-        name: "Vercel",
+        src: "/kamil.webp",
+        name: "Kamil Kargo",
         description:
-            "Amet praesentium deserunt ex commodi tempore fuga voluptatem....",
+            "Добро пожаловать в Kamil Kargo – вашего универсального логистического партнера! Управляйте своими грузоперевозками с легкостью, используя официальное мобильное приложение Kamil Kargo.",
         isInvertable: true,
-        href: "https://vercel.com",
+        href: "https://play.google.com/store/apps/details?id=tm.com.sanlyteklip.kamilkargo",
     },
     {
-        src: "https://storage.efferd.com/logo/openai.svg",
-        name: "OpenAI",
+        src: "/kargotm.webp",
+        name: "Kargoo tm",
         description:
-            "Amet praesentium deserunt ex commodi tempore fuga voluptatem....",
+            "Kargoo — ваш незаменимый помощник в логистике! Мы объединяем множество транспортных компаний, чтобы предложить вам лучшие тарифы и услуги в одном месте.",
         isInvertable: true,
         icon: <DecorIcon position="bottom-left" />,
-        href: "https://openai.com",
+        href: "https://play.google.com/store/apps/details?id=tm.com.sanlyteklip.kargoo",
     },
     {
-        src: "https://storage.efferd.com/logo/supabase.svg",
-        name: "Supabase",
+        src: "/yb.webp",
+        name: "YBExpress",
         description:
-            "Amet praesentium deserunt ex commodi tempore fuga voluptatem....",
-        href: "https://supabase.com",
+            "Простое и удобное приложение для отслеживания посылок, отправляемых из Китая в Туркменистан. Просто введите номер отслеживания и следите за каждым шагом.",
+        href: "https://play.google.com/store/apps/details?id=tm.com.st.ybexpress",
     },
     {
-        src: "https://storage.efferd.com/logo/github.svg",
-        name: "GitHub",
+        src: "/warehouse.webp",
+        name: "Kargoo Warehouse",
         description:
-            "Amet praesentium deserunt ex commodi tempore fuga voluptatem....",
+            "Организуйте свой грузовой центр как никогда раньше!С Kargoo ваши сотрудники смогут быстро создавать отправки, добавлять клиентские посылки и отслеживать всё от начала до конца.",
         isInvertable: true,
-        href: "https://github.com",
+        href: "https://play.google.com/store/apps/details?id=tm.com.sanlyteklip.kargoo.wh",
     },
     {
-        src: "https://storage.efferd.com/logo/notion.svg",
-        name: "Notion",
+        src: "/cashbox.webp",
+        name: "Kargoo Cashbox",
         description:
-            "Amet praesentium deserunt ex commodi tempore fuga voluptatem....",
-        href: "https://notion.so",
+            "Kargoo Cashbox — это современное мобильное приложение, разработанное для эффективного управления денежными операциями и финансовыми потоками вашего бизнеса.",
+        href: "https://play.google.com/store/apps/details?id=tm.com.sanlyteklip.kgocashbox",
     },
     {
-        src: "https://storage.efferd.com/logo/gmail.svg",
-        name: "Gmail",
+        src: "/umytly.webp",
+        name: "Umytly Market",
         description:
-            "Amet praesentium deserunt ex commodi tempore fuga voluptatem....",
+            "Онлайн-рынок Umytly Market может быть полезен всем, кто хочет иметь остров, или болан, или харитларинызы, аматли бахадан саргит Эдип билерсиниз!",
         icon: <DecorIcon position="top-left" />,
-        href: "https://mail.google.com",
+        href: "https://play.google.com/store/apps/details?id=tm.com.hs.umytlymarket",
     },
 ];
 

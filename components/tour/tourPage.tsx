@@ -101,7 +101,6 @@ export default function TourPage() {
           src="/virtual-tour/index.html"
           title="Marzipano Virtual Tour"
           loading="eager"
-          importance="high"
           className={`w-full h-full border-0 relative z-10 transition-all ${
             isInteracting ? "pointer-events-auto" : "pointer-events-none"
           }`}
