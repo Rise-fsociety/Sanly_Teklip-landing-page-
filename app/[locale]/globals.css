@@ -60,3 +60,43 @@ html.lenis body {
 .animate-shimmer {
   animation: shimmer 1.4s infinite linear;
 }
+
+
+iframe[id*="akym"], 
+div[id*="akym"],
+[class*="akym"] iframe {
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  z-index: 2147483647 !important; /* Forces it above all other layers */
+  width: 90px !important;
+  height: 90px !important;
+  min-width: 90px !important;
+  min-height: 90px !important;
+  background: transparent !important;
+  background-image: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+#akym-chat-button, 
+.akym-chat-launcher {
+  width: 85px !important;
+  height: 85px !important;
+  background-image: none !important;
+  animation: none !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#akym-chat-button svg, 
+.akym-chat-launcher svg,
+#akym-chat-button img,
+.akym-chat-launcher img {
+  width: 52px !important;
+  height: 52px !important;
+  transform: scale(1.4) !important;
+  transform-origin: center center !important;
+}

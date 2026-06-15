@@ -6,6 +6,7 @@
   --color-soft-sand: #F2E0D0;
   --color-muted-blue: #6E88B0;
   --color-brand-blue: #3AB4FF;
+  --font-sans: var(--font-geist-sans);
 }
 
 html.lenis,
