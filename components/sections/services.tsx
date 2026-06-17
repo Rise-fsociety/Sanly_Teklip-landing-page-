@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
 import { 
   Globe, 
   Smartphone, 
@@ -14,6 +13,7 @@ import { MagicCard } from "../ui/magic-card";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { ImageGallery } from "../imageGallery";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,6 +78,7 @@ export function Services() {
           ))}
         </div>
       </div>
+      <ImageGallery/>
     </section>
   );
 }

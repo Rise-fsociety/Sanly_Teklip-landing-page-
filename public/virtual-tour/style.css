@@ -107,6 +107,7 @@ body.multiple-scenes.mobile #titleBar {
   background-color: rgba(103,115,131,0.8);
 }
 
+
 .mobile #fullscreenToggle {
   width: 50px;
   height: 50px;
@@ -433,10 +434,15 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 /* Info hotspot */
 
 .info-hotspot {
+  position: relative;
   line-height: 1.2em;
   opacity: 0.9;
   -webkit-transition: opacity 0.2s 0.2s;
   transition: opacity 0.2s 0.2s;
+}
+
+.no-touch .info-hotspot:hover {
+  z-index: 99999999 !important;
 }
 
 .no-touch .info-hotspot:hover {
@@ -467,13 +473,12 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   border-radius: 25px;
 }
 
-.desktop.no-touch .info-hotspot .info-hotspot-header:hover {
-  width: 260px;
-  border-radius: 5px;
-  -webkit-transition: width 0.3s ease-in-out,
-                      border-radius 0.3s ease-in-out;
-  transition: width 0.3s ease-in-out,
-              border-radius 0.3s ease-in-out;
+.no-touch .info-hotspot .info-hotspot-header:hover {
+  background-color: #008060; /* Shopify Green */
+  z-index: 999999 !important;
+  transform: scale(1.1);
+  -webkit-transition: background-color 0.2s ease, -webkit-transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .desktop .info-hotspot.visible .info-hotspot-header,
@@ -519,8 +524,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
               padding 0s 0.4s;
 }
 
-.desktop .info-hotspot.visible .info-hotspot-title-wrapper,
-.desktop.no-touch .info-hotspot .info-hotspot-header:hover .info-hotspot-title-wrapper {
+.desktop .info-hotspot.visible .info-hotspot-title-wrapper {
   width: 220px;
   padding: 0 5px;
   -webkit-transition: width 0s 0.4s,
@@ -642,10 +646,67 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
               visibility 0s 0s;
 }
 
+/* Info hotspot hover card (Shopify style) */
+.info-hotspot-hover-card {
+  display: none;
+}
+
+.no-touch .info-hotspot-hover-card {
+  display: block;
+  position: absolute;
+  z-index: 99999999 !important;
+  left: 100%;
+  top: 50%;
+  -ms-transform: translateY(-50%) translateX(10px);
+  -webkit-transform: translateY(-50%) translateX(10px);
+  transform: translateY(-50%) translateX(10px);
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.98);
+  color: #1c1b1b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  min-width: 180px;
+  max-width: 300px;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-align: left;
+}
+
+.no-touch .info-hotspot-hover-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.no-touch .info-hotspot-hover-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #008060; /* Shopify Green */
+}
+
+/* Hover trigger */
+.no-touch .info-hotspot:hover .info-hotspot-hover-card {
+  opacity: 1;
+  pointer-events: auto;
+  -ms-transform: translateY(-50%) translateX(15px);
+  -webkit-transform: translateY(-50%) translateX(15px);
+  transform: translateY(-50%) translateX(15px);
+}
+
+.no-touch .info-hotspot.visible .info-hotspot-hover-card {
+  display: none !important;
+}
+
 /* Info hotspot modal */
 
-.desktop .info-hotspot-modal {
-  display: none;
+.no-touch .info-hotspot-modal {
+  display: none !important;
 }
 
 .info-hotspot-modal {

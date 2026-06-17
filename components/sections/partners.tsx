@@ -15,7 +15,7 @@ const partnerLogos = [
 export function Partners() {
   const t = useTranslations('Partners');
   return (
-    <section id="partners" className="py-24 overflow-hidden">
+    <section id="partners" className="md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 mb-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -62,9 +62,6 @@ export function Integrations() {
 
   return (
     <div className="relative mx-auto border">
-      {/* Optional: You can now use your title and subtitle keys here if needed */}
-      {/* <h2>{t("title")}</h2> <p>{t("subtitle")}</p> */}
-
       <div className="grid grid-cols-2 gap-px bg-border md:grid-cols-3">
         {data.map((item) => (
           <IntegrationCard integration={item} key={item.name}>

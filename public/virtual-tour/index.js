@@ -333,6 +333,22 @@
     wrapper.appendChild(header);
     wrapper.appendChild(text);
 
+    // Create hover card for desktop hover (Shopify style)
+    var hoverCard = document.createElement('div');
+    hoverCard.classList.add('info-hotspot-hover-card');
+
+    var hoverTitle = document.createElement('div');
+    hoverTitle.classList.add('info-hotspot-hover-title');
+    hoverTitle.innerHTML = hotspot.title;
+
+    var hoverPrice = document.createElement('div');
+    hoverPrice.classList.add('info-hotspot-hover-price');
+    hoverPrice.innerHTML = hotspot.text;
+
+    hoverCard.appendChild(hoverTitle);
+    hoverCard.appendChild(hoverPrice);
+    wrapper.appendChild(hoverCard);
+
     // Create a modal for the hotspot content to appear on mobile mode.
     var modal = document.createElement('div');
     modal.innerHTML = wrapper.innerHTML;
@@ -340,8 +356,9 @@
     document.body.appendChild(modal);
 
     var toggle = function() {
-      wrapper.classList.toggle('visible');
-      modal.classList.toggle('visible');
+      if (document.body.classList.contains('touch')) {
+        modal.classList.toggle('visible');
+      }
     };
 
     // Show content when hotspot is clicked.
@@ -353,6 +370,18 @@
     // Prevent touch and scroll events from reaching the parent element.
     // This prevents the view control logic from interfering with the hotspot.
     stopTouchAndScrollEventPropagation(wrapper);
+
+    // Raise parent wrapper z-index on hover to ensure hover card is always on top
+    wrapper.addEventListener('mouseenter', function() {
+      if (wrapper.parentElement) {
+        wrapper.parentElement.style.zIndex = '99999999';
+      }
+    });
+    wrapper.addEventListener('mouseleave', function() {
+      if (wrapper.parentElement) {
+        wrapper.parentElement.style.zIndex = '';
+      }
+    });
 
     return wrapper;
   }

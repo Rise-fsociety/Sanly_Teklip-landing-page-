@@ -22,6 +22,7 @@ interface FooterLink {
   label: string;
   href: string;
   icon?: any;
+  isExternal?:boolean
 }
 
 export function Footer() {
@@ -56,7 +57,7 @@ export function Footer() {
           if (emailMatch) {
             const label = locale === "ru" ? emailMatch.nameRu : locale === "en" ? emailMatch.nameEn : emailMatch.nameTm;
             if (label) {
-              dynamicContacts.push({ label, href: `mailto:${label}`, icon: Mail });
+              dynamicContacts.push({ label, href: "/products", icon: MapPin, isExternal: false });
             }
           }
 
@@ -90,7 +91,7 @@ export function Footer() {
   const fallbackContacts = [
     { label: "sanlyteklip@sanlyteklip.com.tm", href: "mailto:sanlyteklip@sanlyteklip.com.tm", icon: Mail },
     { label: "+99365688442", href: "tel:+99365688442", icon: Phone },
-    { label: t("address"), href: "#", icon: MapPin },
+    { label: t("address"), href: "/products", icon: MapPin },
   ];
 
   const finalContacts = contactsList.length > 0 ? contactsList : fallbackContacts;
@@ -145,7 +146,6 @@ export function Footer() {
               height={56}
               className="mb-8 brightness-0 invert"
             /> 
-            {/* Scaled up description font layout: text-lg / md:text-xl / 2xl:text-2xl */}
             <p className="text-slate-300 leading-relaxed text-lg md:text-xl 2xl:text-2xl max-w-sm mb-10 font-light">
               {t("description")}
             </p>
@@ -168,7 +168,6 @@ export function Footer() {
               custom={colIdx + 1}
               variants={fadeUp}
             >
-              {/* Scaled up section header text typography */}
               <h3 className="text-sm md:text-base font-black tracking-widest uppercase text-white mb-6">
                 {col.heading}
               </h3>
@@ -179,8 +178,7 @@ export function Footer() {
 
                   return (
                     <li key={itemKey}>
-                      {link.href && link.href !== "#" ? (
-                        /* Scaled up interactive nav targets: text-lg / md:text-xl / 2xl:text-2xl */
+                      {link.href ? (
                         <Link
                           href={link.href}
                           onClick={(e) => handleNavClick(e, link.href)}

@@ -70,8 +70,8 @@ export default function Home() {
       <Services />
       <Work />
       <FeaturedProducts />
+      <Tools /> 
       <Partners />
-      <Tools />
     </main>
   );
 }
