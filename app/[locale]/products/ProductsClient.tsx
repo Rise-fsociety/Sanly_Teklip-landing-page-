@@ -153,7 +153,7 @@ export function ProductsClient({ initialProducts, initialCategories, initialTota
   }, [page, activeCategory, searchQuery, API_URL]);
 
   useEffect(() => {
-    if (categories.length > 0) return; // Skip if already loaded from SSR
+    if (categories.length > 0) return; 
     const fetchCategories = async () => {
       try {
         const response = await fetch(`${API_URL}/public/category`, {
@@ -220,7 +220,6 @@ export function ProductsClient({ initialProducts, initialCategories, initialTota
   const allProducts = mappedApiProducts;
   const wishlistItems = allProducts.filter((p) => wishlist.includes(p.id));
 
-  // Filtering is now handled by the backend
   const filteredProducts = allProducts;
 
   const handleOpenDetails = (product: Product) => {

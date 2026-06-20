@@ -10,6 +10,10 @@
     "searchPlaceholder": "Поиск товаров...",
     "backHome": "На главную"
   },
+    "Intro":{
+    "introduction":"Введение",
+    "video":"Смотреть все видео"
+  },
   "Cart": {
     "cartTitle": "Корзина",
     "emptyMessage": "Ваша корзина пуста",
@@ -23,7 +27,11 @@
     "placeholderName": "Ваше имя",
     "placeholderPhone": "Ваш номер",
     "placeholderAddress": "Ваш адрес",
-    "placeholderNotes": "Заметки"
+    "placeholderNotes": "Заметки",
+    "bundleSetups": "Готовые комплекты",
+    "bundleCash": "Касса",
+    "bundleMarket": "Маркет",
+    "frequentlyBought": "Часто покупают вместе"
   },
   "Products": {
     "add": "Добавить в корзину",

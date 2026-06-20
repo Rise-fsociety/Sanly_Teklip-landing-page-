@@ -687,10 +687,9 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 .no-touch .info-hotspot-hover-price {
   font-size: 15px;
   font-weight: 700;
-  color: #008060; /* Shopify Green */
+  color: #008060;
 }
 
-/* Hover trigger */
 .no-touch .info-hotspot:hover .info-hotspot-hover-card {
   opacity: 1;
   pointer-events: auto;
@@ -702,8 +701,6 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 .no-touch .info-hotspot.visible .info-hotspot-hover-card {
   display: none !important;
 }
-
-/* Info hotspot modal */
 
 .no-touch .info-hotspot-modal {
   display: none !important;
@@ -787,7 +784,6 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 .info-hotspot-modal .info-hotspot-title {
   display: inline-block;
   vertical-align: middle;
-
   -moz-user-select: text;
   -webkit-user-select: text;
   -ms-user-select: text;
@@ -855,7 +851,7 @@ body.view-control-buttons .viewControlButton {
   display: block;
 }
 
-/* Hide controls when width is too small */
+
 @media (max-width: 600px) {
   body.view-control-buttons .viewControlButton {
     display: none;

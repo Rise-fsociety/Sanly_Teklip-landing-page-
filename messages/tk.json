@@ -10,6 +10,10 @@
     "searchPlaceholder": "Haryt gözle...",
     "backHome": "Başa sahypa"
   },
+  "Intro":{
+    "introduction":"Tanyşdyryş",
+    "video":"Ähli wideolary gör"
+  },
   "Cart": {
     "cartTitle": "Sebet",
     "emptyMessage": "Sebet boş",

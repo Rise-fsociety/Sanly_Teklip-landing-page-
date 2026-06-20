@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { LoginModal } from "./login-modal";
 
 interface StoreHeaderProps {
   searchQuery?: string;
@@ -149,10 +148,6 @@ export function StoreHeader({
           )}
         </div>
       </nav>
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
     </>
   );
 }

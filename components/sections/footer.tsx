@@ -64,7 +64,7 @@ export function Footer() {
           if (addressMatch) {
             const label = locale === "ru" ? addressMatch.nameRu : locale === "en" ? addressMatch.nameEn : addressMatch.nameTm;
             if (label) {
-              dynamicContacts.push({ label, href: "#", icon: MapPin });
+              dynamicContacts.push({ label, href: "/products", icon: MapPin });
             }
           }
 

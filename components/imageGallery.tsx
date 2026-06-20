@@ -3,17 +3,16 @@
 import { useState } from "react";
 import { LazyImage } from "@/components/lazyImage";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { X} from "lucide-react";
+import { X } from "lucide-react";
 import "swiper/css";
 import Image from "next/image";
 
-
 const MY_IMAGES = [
-  { src: "/gallery/galleryStarting.webp", orientation: "portrait" }, 
+  { src: "/gallery/galleryStarting.webp", orientation: "portrait", description: 'Bagyr Rysgal market' }, 
   { src: "/gallery/cashboxHero.webp", orientation: "landscape" }, 
-  { src: "/gallery/cashboxPortrait.webp", orientation: "portrait" }, 
-  { src: "/gallery/sitting.webp", orientation: "portrait" }, 
-  { src: "/gallery/advertisement.webp", orientation: "portrait" }, 
+  { src: "/gallery/cashboxPortrait.webp", orientation: "portrait", description: 'Yunus Market mir ice-cream' }, 
+  { src: "/gallery/sitting.webp", orientation: "portrait", description: 'Bagyr Mobile' }, 
+  { src: "/gallery/advertisement.webp", orientation: "portrait", description: 'Kassa enjamlar merkezi Sanly Teklip' }, 
   { src: "/gallery/skanner.webp", orientation: "landscape" }, 
   { src: "/gallery/monoblokHero.webp", orientation: "landscape" }, 
   { src: "/gallery/kassa.webp", orientation: "landscape" }, 
@@ -42,7 +41,7 @@ export function ImageGallery() {
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center md:mt-20 py-10">
       <div className="mx-auto grid container px-4 grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-4 md:grid-cols-4 md:gap-6">
         {columns.map((columnImages, colIndex) => (
-          <div className="grid gap-2 sm:grid-gap-4 h-fit" key={colIndex}>
+          <div className="grid gap-2 sm:gap-4 h-fit" key={colIndex}>
             {columnImages.map((image, imgIndex) => {
               if (!image) return null;
 
@@ -55,7 +54,8 @@ export function ImageGallery() {
                 <div
                   key={`${colIndex}-${imgIndex}`}
                   onClick={() => openModalAtImage(image.src)}
-                  className="cursor-pointer transition-transform active:scale-95">
+                  className="group relative overflow-hidden rounded-lg cursor-pointer transition-transform active:scale-95"
+                >
                   <LazyImage
                     alt={`Image ${colIndex}-${imgIndex}`}
                     containerClassName="cn-rounded"
@@ -64,6 +64,14 @@ export function ImageGallery() {
                     ratio={ratio}
                     src={image.src}
                   />
+                  
+                  {image.description && (
+                    <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <p className="text-white text-sm  xl:text-2xl font-medium translate-y-2 transition-transform duration-300 group-hover:translate-y-0">
+                        {image.description}
+                      </p>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -72,10 +80,11 @@ export function ImageGallery() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-99999 flex items-center justify-center bg-black/95 backdrop-blur-sm select-none">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-sm select-none">
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors">
+            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          >
             <X className="size-6" />
           </button>
 
@@ -85,12 +94,14 @@ export function ImageGallery() {
               spaceBetween={20}
               slidesPerView={1}
               grabCursor={true}
-              className="w-full h-full">
+              className="w-full h-full"
+            >
               {MY_IMAGES.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex items-center justify-center h-full">
-                  <div className="relative w-full h-[75vh] md:h-[80vh] max-w-4xl mx-auto flex items-center justify-center">
+                  className="flex flex-col items-center justify-center h-full gap-4"
+                >
+                  <div className="relative w-full h-[70vh] md:h-[75vh] max-w-4xl mx-auto flex items-center justify-center">
                     <Image
                       src={image.src}
                       alt={`Slide ${idx}`}
@@ -100,6 +111,11 @@ export function ImageGallery() {
                       className="object-contain rounded-lg pointer-events-none"
                     />
                   </div>
+                  {image.description && (
+                    <p className="text-white/80 text-sm md:text-base xl:text-4xl text-center p-4">
+                      {image.description}
+                    </p>
+                  )}
                 </SwiperSlide>
               ))}
             </Swiper>

@@ -106,6 +106,10 @@
     "next": "Next",
     "seeMore": "See More"
   },
+    "Intro":{
+    "introduction":"Introduction",
+    "video":"Watch All Videos"
+  },
   "Integrations": {
     "title": "Integrations",
     "subtitle": "We work with the best platforms and tools to deliver powerful solutions for your business.",

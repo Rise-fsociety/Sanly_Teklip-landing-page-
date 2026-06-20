@@ -7,6 +7,7 @@ import { About } from "@/components/sections/about";
 import { Work } from "@/components/sections/work";
 import { FeaturedProducts } from "@/components/sections/featuredProducts";
 import { SmoothScrollInit } from "@/components/smooth-scroll-init";
+import { IntroductionVideo } from "@/components/sections/introduction";
 
 const baseUrl = "https://sanlyteklip.com.tm";
 
@@ -67,6 +68,7 @@ export default function Home() {
       <SmoothScrollInit />
       <Hero />
       <About />
+      <IntroductionVideo/>
       <Services />
       <Work />
       <FeaturedProducts />
