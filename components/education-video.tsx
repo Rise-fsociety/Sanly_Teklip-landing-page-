@@ -17,7 +17,6 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
-// --- High Performance Media Wrappers ---
 export const VideoPlayer = ({ style, ...props }: ComponentProps<typeof MediaController>) => (
   <MediaController style={{ ...style }} {...props} />
 );
