@@ -2,12 +2,12 @@ import { cn } from "@/lib/utils";
 import { DecorIcon } from "@/components/decor-icon";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { useTranslations } from "next-intl"; // Added this import
+import { useTranslations } from "next-intl";
 
 type Integration = {
   src: string;
   name: string;
-  descriptionKey: string; // Changed from 'description' to a translation key
+  descriptionKey: string; 
   isInvertable?: boolean;
   icon?: React.ReactNode;
   href: string;
