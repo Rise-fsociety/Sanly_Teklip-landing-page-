@@ -57,16 +57,28 @@
     "title": "Işimiz",
     "subtitle": "Müşderilerimiz üçin döredilen taslamalar."
   },
+  "SEO": {
+    "title": "Sanly Teklip | Korporatiw programma üpjünçiligi we Akhasap hyzmaty",
+    "description": "Täze programma üpjünçiligini, ýokary hilli ulgam arhitekturalary we Akhasap ekosistemasy arkaly kärhanalary sanlaşdyrmak çözgütleri."
+  },
   "Tour": {
     "clickToInteract": "Tura basyň",
     "fullScreen": "Doly Ekran",
     "exitFullscreen": "Doly Ekrandan çyk"
   },  "Hero": {
-    "title": "Gelejegiň ýoly",
-    "type1": "Sanly çözgütler.",
-    "type2": "Ygtybarly hyzmatlar.",
-    "type3": "Akhasap hyzmatlar.",
-    "type4": "Sanly Marketing."
+   "innovate": "INNOWASIÝA",
+    "engineer": "INŽENERLIK",
+    "established": "GUR. 2017",
+    "productionType": "SANLY ÖNÜMÇILIK",
+    "statusLocation": "Akhasap",
+    "mobileFeatureOne": "Döwrebap programma üpjünçiligi",
+    "mobileFeatureTwo": "Giňeldilip bilinýän IT ekosistemalary we awtomatlaşdyrma",
+    "expertiseHeader": "Esasy tejribe ugurlarymyz",
+    "expertiseOne": "Doly programma üpjünçiligini işläp düzmek",
+    "expertiseTwo": "Akhasap hyzmaty",
+    "mainDescription": "Kärhanaňyzyň işini kämilleşdirmek we sanly transformasiýany çaltlandyrmak üçin ýörite programma üpjünçiliginiň arhitekturasyny taslaýarys, gurýarys we ornaşdyrýarys.",
+    "projectsCount": "10-dan gowrak taslama",
+    "discoverStack": "Tehnologiýalarymyz bilen tanyş boluň"
   },
   "About": {
     "subtitle": "Dinamiki we innowasion sanly çözgütler merkezi.",

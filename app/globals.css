@@ -6,8 +6,26 @@
   --color-soft-sand: #F2E0D0;
   --color-muted-blue: #6E88B0;
   --color-brand-blue: #3AB4FF;
+  --color-soft-gray: #28282b;
   --font-sans: var(--font-geist-sans);
+  --breakpoint-footer: 813px;
+
+
+--animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    /* Starts compressed near the top-left circle */
+    transform: translate(-10%, -10%) scale(0.4) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    /* Projects fully outward to shine directly across "SANLY TEKLIP" */
+    transform: translate(5%, 5%) scale(1) rotate(0deg);
+  }
 }
+}
+
 
 html.lenis,
 html.lenis body {

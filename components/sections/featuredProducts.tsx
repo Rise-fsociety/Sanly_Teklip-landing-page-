@@ -173,7 +173,7 @@ export function FeaturedProducts() {
   }
 
   return (
-    <section className="py-8 md:py-12 xl:py-24 bg-white container mx-auto px-4">
+    <section className="py-8 md:py-12 xl:py-24 container mx-auto px-4">
       <div className="max-w-[1920px] mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
           {products.map((product) => (

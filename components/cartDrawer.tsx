@@ -240,11 +240,7 @@ export function CartDrawer() {
                 </button>
               </div>
             </div>
-
-            {/* ── Scrollable body ── */}
             <div className="flex-1 overflow-y-auto">
-
-              {/* Cart items */}
               <div className="p-4 space-y-2">
                 {cart.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-16 text-gray-400 gap-4">
@@ -308,7 +304,6 @@ export function CartDrawer() {
                 )}
               </div>
 
-              {/* ── Cross-sell suggestions ── */}
               <AnimatePresence>
                 {(sugLoading || suggestions.length > 0) && (
                   <motion.div
@@ -317,7 +312,6 @@ export function CartDrawer() {
                     exit={{ opacity: 0 }}
                     className="px-4 pb-6"
                   >
-                    {/* Section header */}
                     <div className="flex items-center gap-2 mb-3">
                       <Sparkles className={`w-3.5 h-3.5 ${isCash ? "text-[#0157A4]" : "text-emerald-600"}`} />
                       <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400">

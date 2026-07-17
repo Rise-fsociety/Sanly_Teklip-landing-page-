@@ -38,7 +38,7 @@ export function Services() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 text-slate-900 tracking-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 text-soft-gray tracking-tight">
             {t('title')}
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-slate-600 font-medium">
@@ -63,10 +63,10 @@ export function Services() {
                 gradientOpacity={1}
               >
                 <div className="p-8 h-full flex flex-col items-center border-gray-200 border">
-                  <div className="mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                  <div className="mb-6 p-4 rounded-2xl  group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     <service.icon className="w-8 h-8 text-slate-700 transition-colors duration-300 group-hover:text-white" />
                   </div>
-                  <h3 className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold mb-4 text-slate-900">
+                  <h3 className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold mb-4 text-soft-gray">
                     {t(service.key)}
                   </h3>
                   <p className="text-sm md:text-base 2xl:text-xl text-slate-600   leading-relaxed text-center font-medium">

@@ -120,7 +120,7 @@ const useAnimationLoop = (
   const rafRef = useRef<number | null>(null);
   const lastTimestampRef = useRef<number | null>(null);
   const offsetRef = useRef<number>(0);
-  const velocityRef = useRef<number>(0);
+  const currentVelocityRef = useRef<number>(targetVelocity);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -128,31 +128,43 @@ const useAnimationLoop = (
 
     const seqSize = isVertical ? seqHeight : seqWidth;
 
-    if (seqSize > 0) {
-      offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
-      track.style.transform = isVertical
-        ? `translate3d(0, ${-offsetRef.current}px, 0)`
-        : `translate3d(${-offsetRef.current}px, 0, 0)`;
-    }
-
     const animate = (timestamp: number) => {
-      if (lastTimestampRef.current === null) lastTimestampRef.current = timestamp;
+      if (lastTimestampRef.current === null) {
+        lastTimestampRef.current = timestamp;
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
 
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
+      // Safe capped deltaTime calculation to eliminate frame-drop spikes
+      const elapsedSeconds = Math.min(0.1, (timestamp - lastTimestampRef.current) / 1000);
       lastTimestampRef.current = timestamp;
 
-      const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
-      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
-      velocityRef.current += (target - velocityRef.current) * easingFactor;
+      // Determine current target velocity state
+      const activeTargetVelocity = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
 
+      // Smoothly transition velocity only if values change (e.g., hover events)
+      if (currentVelocityRef.current !== activeTargetVelocity) {
+        const easingFactor = 1 - Math.exp(-elapsedSeconds / ANIMATION_CONFIG.SMOOTH_TAU);
+        currentVelocityRef.current += (activeTargetVelocity - currentVelocityRef.current) * easingFactor;
+        
+        // Snap directly to target if difference becomes sub-pixel tiny
+        if (Math.abs(currentVelocityRef.current - activeTargetVelocity) < 0.01) {
+          currentVelocityRef.current = activeTargetVelocity;
+        }
+      }
+
+      // ── The Fixed Linear Translation Loop ──
       if (seqSize > 0) {
-        let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
+        // Linearly compute offset calculation based strictly on time
+        let nextOffset = offsetRef.current + currentVelocityRef.current * elapsedSeconds;
+        
+        // Clean mathematical modulo normalization to eliminate pixel-jumping skips
         nextOffset = ((nextOffset % seqSize) + seqSize) % seqSize;
         offsetRef.current = nextOffset;
 
         track.style.transform = isVertical
-          ? `translate3d(0, ${-offsetRef.current}px, 0)`
-          : `translate3d(${-offsetRef.current}px, 0, 0)`;
+          ? `translate3d(0, ${-nextOffset}px, 0)`
+          : `translate3d(${-nextOffset}px, 0, 0)`;
       }
 
       rafRef.current = requestAnimationFrame(animate);

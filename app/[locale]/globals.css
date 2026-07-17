@@ -6,7 +6,21 @@
   --color-soft-sand: #F2E0D0;
   --color-muted-blue: #6E88B0;
   --color-brand-blue: #3AB4FF;
+  
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+  }
 }
+
 
 html.lenis,
 html.lenis body {

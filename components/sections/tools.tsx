@@ -69,7 +69,7 @@ export function Tools() {
 
   return (
     <section id="tools" className="py-24 bg-transparent overflow-hidden relative">
-      <div className="container mx-auto px-4 relative z-10 bg-white">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export function Tools() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-black mb-6 text-soft-gray tracking-tight">
             {t('title')}
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-slate-600 font-medium">
@@ -89,7 +89,7 @@ export function Tools() {
           className="relative flex h-auto min-h-[500px] md:h-[600px] w-full items-center justify-center overflow-hidden rounded-3xl border bg-slate-50/50 p-4 md:p-10 md:shadow-inner"
           ref={containerRef}
         >
-          <div className="absolute z-10 top-10 flex flex-col items-center justify-center gap-2">
+          <div className="absolute z-10 top-30 md:top-10 flex flex-col items-center justify-center gap-2">
             <Circle
               ref={akhasapRef}
               className="size-12 md:size-16 shadow-slate-200 p-2 md:p-3 bg-white"

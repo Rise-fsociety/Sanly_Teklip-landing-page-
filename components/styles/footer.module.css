@@ -1,0 +1,255 @@
+.root {
+  --layout-columns-gap: 1.5vw;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  column-gap: var(--layout-columns-gap);
+  padding: 0 2vw;
+  padding-bottom: 2vw;
+  height: auto;
+  width: 100%;
+  translate: inherit !important;
+  box-shadow: none;
+
+  @media (max-width: 812px) {
+    display: flex;             
+    flex-direction: column;    
+    gap: 1.5rem;                 
+    padding: 0rem 1.5rem 2rem 1.5rem; /* Removed padding-top completely */
+    margin-top: -2rem;         /* Pulls the footer up to close the gap under the logos */
+  }
+
+  .linksContainer {
+    padding-top: calc(var(--layout-columns-gap) * 4);
+    @media (max-width: 812px) {
+      padding-top: 0;          
+    }
+
+    width: 100%;
+    > div {
+      width: 100%;
+    }
+    .title {
+      color: white;
+      padding-bottom: var(--layout-columns-gap);
+    }
+
+    .linkTextContainer {
+      padding-top: calc(var(--layout-columns-gap) * 0.5);
+      @media (max-width: 812px) {
+        padding-top: 0.5rem;
+      }
+      .linkText {
+        cursor: pointer;
+        overflow: unset;
+        display: flex;
+        align-items: center;
+        position: relative;
+        > svg {
+          height: 0.75vw;
+          width: 0.75vw;
+          top: auto;
+          overflow: unset;
+          fill: white;
+          stroke: white;
+          @media (max-width: 812px) {
+            height: 2vw;
+            width: 2vw;
+            left: -2vw;
+          }
+        }
+
+        &:hover {
+          svg {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.1, 1) !important;
+            transform: translate3d(1vw, 0, 0) rotate(-150deg) !important;
+            @media (max-width: 812px) {
+              transform: translate3d(2vw, 0, 0) rotate(-150deg) !important;
+            }
+          }
+
+          span {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.1, 1) !important;
+            transform: translate3d(0.6vw, 0, 0);
+            @media (max-width: 812px) {
+              transform: translate3d(1.8vw, 0, 0);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .emailContaineer {
+    @media (max-width: 812px) {
+      width: 100%;
+      padding-top: 0;
+    }
+
+    padding-top: calc(var(--layout-columns-gap) * 4);
+    width: min-content;
+    grid-column: 9 / 17;
+    .workWithMe {
+      color: white;
+    }
+    .link {
+      color: white;
+      font-size: 2.5vw;
+      line-height: 4.1vw;
+      position: relative;
+      white-space: nowrap;
+
+      cursor: pointer;
+      .email {
+        color: white;
+      }
+    }
+    .link::before,
+    .link::after {
+      position: absolute !important;
+      width: 100%;
+      height: 1px;
+      top: 100%;
+      left: 0;
+      pointer-events: none;
+    }
+    .link::before {
+      content: '';
+    }
+    .link:hover path {
+       
+    }
+    .link:hover .linkGraphic {
+      transform: translate3d(-65.5%, 0, 0);
+    }
+    .linkGraphic {
+      position: absolute !important;
+      left: 0;
+      pointer-events: none;
+      fill: none;
+      stroke: white;
+      bottom: 0;
+      stroke-width: 0.03em;
+      transition: transform 0.7s;
+      transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
+    }
+  }
+
+  .middleText {
+    padding-top: calc(var(--layout-columns-gap) * 0.5);
+  }
+  .middleContainer {
+    @media (max-width: 812px) {
+      padding-top: 0;
+    }
+
+    > span > span > span {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  div {
+    color: white;
+  }
+
+  .giats {
+    @media (max-width: 812px) {
+      font-size: 9.5vw;         
+      line-height: 10vw;
+      transform: translate(0, 0); 
+      margin-top: 2rem;
+      width: 100%;             /* Ensures it takes full row width to center correctly */
+      display: flex;           /* Reinforces horizontal alignment on mobile devices */
+      justify-content: center; /* Horizontally centers "SANLY TEKLIP" */
+      text-align: center;
+    }
+    align-self: flex-end;
+    grid-column: 1 / -1;       
+    display: flex;       
+    justify-content: center; 
+
+    font-size: 15.2vw;
+    line-height: 12.628vw;
+    transform: translate(0, 2.1vw); 
+    color: white;
+    white-space: nowrap; 
+    
+    > span {
+      display: flex;
+      white-space: nowrap; 
+    }
+  }
+  .goToTop {
+    position: relative;
+
+    @media (max-width: 812px) {
+      align-self: flex-start;
+      justify-self: flex-start;
+    }
+    align-self: flex-end;
+    justify-self: flex-end;
+    grid-column: 13 / 17;
+  }
+}
+.circleButton {
+  z-index: 2;
+  box-shadow:
+    0 0.32vw 0.52vw #0000000a,
+    0 0.12vw 0.22vw #0000000a;
+  @media (max-width: 812px) {
+    width: 10vw;
+    height: 10vw;
+  }
+  width: 4vw;
+  height: 4vw;
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
+  .arrowClassic {
+    z-index: 2;
+    @media (max-width: 812px) {
+      width: 4vw;
+      height: 4vw;
+      top: 3.05vw;
+      left: 3.05vw;
+    }
+    position: absolute;
+    top: 1.25vw;
+    left: 1.25vw;
+    height: 1.5vw;
+    width: 1.5vw;
+    fill: var(--black);
+    stroke: var(--black);
+    transform: translateY(0vw) rotate(180deg);
+  }
+
+  .ball {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 40vw;
+    background-color: var(--fillColor);
+    -webkit-transition:
+      width 0.6s cubic-bezier(0.4, 0, 0.1, 1),
+      height 0.6s cubic-bezier(0.4, 0, 0.1, 1);
+    transition:
+      width 0.6s cubic-bezier(0.4, 0, 0.1, 1),
+      height 0.6s cubic-bezier(0.4, 0, 0.1, 1);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+}
+.circleButton:hover {
+  .ball {
+    width: 25vw;
+    height: 25vw;
+    z-index: 1;
+    @media (max-width: 812px) {
+      width: 80vw;
+      height: 80vw;
+    }
+  }
+}

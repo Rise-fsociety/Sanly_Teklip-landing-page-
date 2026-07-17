@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Script from 'next/script';
 
 declare global {
@@ -12,22 +12,31 @@ declare global {
   }
 }
 
-export default function AkymChatWidget() {
+interface ChatWidgetProps {
+  onComplete: boolean;
+}
+
+export default function AkymChatWidget({ onComplete }: ChatWidgetProps) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.AkymChat = {
-        apiUrl: "https://cargo.sanlyteklip.com.tm/chat-api",
-        key: "cef92c1da574464cbb8c2d192ad6c4c5"
-      };
+    if (onComplete) {
+      if (typeof window !== 'undefined') {
+        window.AkymChat = {
+          apiUrl: "https://cargo.sanlyteklip.com.tm/chat-api",
+          key: "cef92c1da574464cbb8c2d192ad6c4c5"
+        };
+      }
+      setShouldLoad(true);
     }
-  }, []);
+  }, [onComplete]);
+
+  if (!shouldLoad) return null;
 
   return (
-    <>
-      <Script
-        src="https://cargo.sanlyteklip.com.tm/chat-api/widget.js"
-        strategy="lazyOnload"
-      />
-    </>
+    <Script
+      src="https://cargo.sanlyteklip.com.tm/chat-api/widget.js"
+      strategy="lazyOnload"
+    />
   );
 }

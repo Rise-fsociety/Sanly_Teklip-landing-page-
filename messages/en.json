@@ -29,12 +29,24 @@
     "add": "Add to Cart",
     "added": "Product Added"
   },
+  "SEO": {
+    "title": "Sanly Teklip | Enterprise Software Engineering & Akhasap Service",
+    "description": "Next-generation software engineering, high-load system architectures, and cloud business automation via the custom Akhasap enterprise ecosystem."
+  },
   "Hero": {
-    "title": "Path to the future",
-    "type1": "Digital solutions.",
-    "type2": "Reliable services.",
-    "type3": "Akhasap services.",
-    "type4": "Digital Marketing."
+  "innovate": "INNOVATE",
+    "engineer": "ENGINEER",
+    "established": "EST. 2017",
+    "productionType": "DIGITAL PRODUCTION",
+    "statusLocation": "Akhasap",
+    "mobileFeatureOne": "Next-Gen Software Engineering",
+    "mobileFeatureTwo": "Scalable IT Ecosystems & Automation",
+    "expertiseHeader": "Core Expertise",
+    "expertiseOne": "Full-Cycle Software Development",
+    "expertiseTwo": "Akhasap Service",
+    "mainDescription": "We design, build, and deploy custom software architecture to streamline enterprise operations and accelerate your digital transformation.",
+    "projectsCount": "10+ Projects",
+    "discoverStack": "Discover Our Stack"
   },
   "About": {
     "subtitle": "Center of dynamic and innovative digital solutions.",
